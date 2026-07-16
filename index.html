@@ -21,22 +21,26 @@
     --pine:#1F3A2E;
     --sage:#A8B84A;
     --gold:#C9A227;
+    --wine:#8E1B3F;
+    --teal:#1E6B52;
+    --steel-navy:#1B3F73;
+    --mustard:#D68A2E;
+    --chartreuse:#D4E157;
   }
 
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
   body{
     margin:0;
-    background:var(--paper);
+    background:
+      repeating-linear-gradient(0deg, rgba(74,30,61,0.055) 0 3px, transparent 3px 40px),
+      repeating-linear-gradient(90deg, rgba(30,107,82,0.055) 0 3px, transparent 3px 40px),
+      repeating-linear-gradient(0deg, rgba(230,56,111,0.04) 0 1px, transparent 1px 20px),
+      repeating-linear-gradient(90deg, rgba(27,63,115,0.04) 0 1px, transparent 1px 20px),
+      var(--paper);
     color:var(--ink);
     font-family:'Space Grotesk', sans-serif;
     -webkit-font-smoothing:antialiased;
-    background-image:
-      radial-gradient(circle at 8% 12%, rgba(230,56,111,0.05) 0, transparent 9%),
-      radial-gradient(circle at 92% 30%, rgba(31,58,46,0.06) 0, transparent 10%),
-      radial-gradient(circle at 20% 85%, rgba(193,89,44,0.06) 0, transparent 11%),
-      radial-gradient(circle at 75% 92%, rgba(74,30,61,0.06) 0, transparent 10%),
-      radial-gradient(circle at 55% 55%, rgba(168,184,74,0.05) 0, transparent 12%);
   }
 
   .outline-text{
@@ -72,28 +76,29 @@
   /* ---------- HERO ---------- */
   .hero{
     background:
-      linear-gradient(rgba(19,28,61,0.82), rgba(19,28,61,0.9)),
-      url('images/img12.jpg'),
-      radial-gradient(circle at 15% 20%, rgba(230,56,111,0.22), transparent 45%),
-      radial-gradient(circle at 85% 15%, rgba(193,89,44,0.22), transparent 45%),
-      radial-gradient(circle at 25% 90%, rgba(74,30,61,0.3), transparent 45%),
-      radial-gradient(circle at 90% 85%, rgba(168,184,74,0.2), transparent 45%),
-      var(--navy);
-    background-size:cover;
-    background-position:center;
-    color:var(--cream);
+      repeating-linear-gradient(0deg, rgba(74,30,61,0.14) 0 6px, transparent 6px 46px),
+      repeating-linear-gradient(90deg, rgba(30,107,82,0.12) 0 6px, transparent 6px 46px),
+      repeating-linear-gradient(0deg, rgba(230,56,111,0.1) 0 3px, transparent 3px 23px),
+      repeating-linear-gradient(90deg, rgba(214,138,46,0.1) 0 3px, transparent 3px 23px),
+      var(--paper);
+    color:var(--eggplant);
     padding:5.5rem 6vw 4.5rem;
     position:relative;
     overflow:hidden;
-    border-bottom:6px solid var(--orange);
+    border-bottom:6px solid var(--wine);
   }
   .hero::after{
     content:"";
     position:absolute;
     inset:0;
-    background-image:
-      repeating-linear-gradient(45deg, rgba(244,234,214,0.035) 0 2px, transparent 2px 14px);
     pointer-events:none;
+  }
+  .hero .tagline{ color:#4A3324; }
+  .hero .outline-text{
+    -webkit-text-stroke:1.5px var(--eggplant);
+    text-shadow:
+      -1.5px -1.5px 0 var(--paper), 1.5px -1.5px 0 var(--paper),
+      -1.5px 1.5px 0 var(--paper), 1.5px 1.5px 0 var(--paper);
   }
   .hero-inner{ max-width:900px; position:relative; }
   .hero h1{
@@ -202,18 +207,22 @@
     border-radius:50%;
     opacity:0.5;
   }
-  .build-card:nth-of-type(6n+1)::before{ background:var(--navy); }
-  .build-card:nth-of-type(6n+1)::after{ background:radial-gradient(circle, rgba(29,41,81,0.16), transparent 70%); }
-  .build-card:nth-of-type(6n+2)::before{ background:var(--pink); }
-  .build-card:nth-of-type(6n+2)::after{ background:radial-gradient(circle, rgba(230,56,111,0.18), transparent 70%); }
-  .build-card:nth-of-type(6n+3)::before{ background:var(--pine); }
-  .build-card:nth-of-type(6n+3)::after{ background:radial-gradient(circle, rgba(31,58,46,0.18), transparent 70%); }
-  .build-card:nth-of-type(6n+4)::before{ background:var(--orange); }
-  .build-card:nth-of-type(6n+4)::after{ background:radial-gradient(circle, rgba(193,89,44,0.18), transparent 70%); }
-  .build-card:nth-of-type(6n+5)::before{ background:var(--eggplant); }
-  .build-card:nth-of-type(6n+5)::after{ background:radial-gradient(circle, rgba(74,30,61,0.18), transparent 70%); }
-  .build-card:nth-of-type(6n+6)::before{ background:var(--gold); }
-  .build-card:nth-of-type(6n+6)::after{ background:radial-gradient(circle, rgba(201,162,39,0.2), transparent 70%); }
+  .build-card:nth-of-type(8n+1)::before{ background:var(--navy); }
+  .build-card:nth-of-type(8n+1)::after{ background:radial-gradient(circle, rgba(29,41,81,0.16), transparent 70%); }
+  .build-card:nth-of-type(8n+2)::before{ background:var(--pink); }
+  .build-card:nth-of-type(8n+2)::after{ background:radial-gradient(circle, rgba(230,56,111,0.18), transparent 70%); }
+  .build-card:nth-of-type(8n+3)::before{ background:var(--teal); }
+  .build-card:nth-of-type(8n+3)::after{ background:radial-gradient(circle, rgba(30,107,82,0.18), transparent 70%); }
+  .build-card:nth-of-type(8n+4)::before{ background:var(--orange); }
+  .build-card:nth-of-type(8n+4)::after{ background:radial-gradient(circle, rgba(193,89,44,0.18), transparent 70%); }
+  .build-card:nth-of-type(8n+5)::before{ background:var(--eggplant); }
+  .build-card:nth-of-type(8n+5)::after{ background:radial-gradient(circle, rgba(74,30,61,0.18), transparent 70%); }
+  .build-card:nth-of-type(8n+6)::before{ background:var(--gold); }
+  .build-card:nth-of-type(8n+6)::after{ background:radial-gradient(circle, rgba(201,162,39,0.2), transparent 70%); }
+  .build-card:nth-of-type(8n+7)::before{ background:var(--wine); }
+  .build-card:nth-of-type(8n+7)::after{ background:radial-gradient(circle, rgba(142,27,63,0.18), transparent 70%); }
+  .build-card:nth-of-type(8n+8)::before{ background:var(--steel-navy); }
+  .build-card:nth-of-type(8n+8)::after{ background:radial-gradient(circle, rgba(27,63,115,0.18), transparent 70%); }
   .build-card h3{
     font-size:1.4rem;
     margin-bottom:0.6rem;
@@ -564,8 +573,6 @@
       <div class="hero-tags">
         <span class="tag outline-text">Painting</span>
         <span class="tag outline-text">Collage</span>
-        <span class="tag outline-text">Photography</span>
-        <span class="tag outline-text">Music</span>
         <span class="tag outline-text">Organizing</span>
         <span class="tag outline-text">New to AI — one week in</span>
       </div>
@@ -800,13 +807,7 @@
     })();
   </script>
 
-  <section id="gallery">
-    <div class="section-head">
-      <span class="eyebrow">02</span>
-      <h2 class="outline-text">Photography</h2>
-    </div>
-    <p class="gallery-intro">A running collection straight from my camera roll — moments, textures, and light I didn't want to lose track of.</p>
-    <div class="collage">
+  <footer>
       <div class="collage-note"><p>The artistry lives in the everyday — this is the eye behind the paintings and collages.</p></div>
       <div class="c-lg"><img src="images/img01.jpg" alt=""></div>
       <div class="c-sm"><img src="images/img02.jpg" alt=""></div>
@@ -828,29 +829,6 @@
       <div class="c-tall"><img src="images/img18.jpg" alt=""></div>
       <div class="c-sm"><img src="images/img19.jpg" alt=""></div>
       <div class="c-wide"><img src="images/img20.jpg" alt=""></div>
-    </div>
-  </section>
-
-  <div class="checker-strip alt"></div>
-
-  <section id="music">
-    <div class="section-head">
-      <span class="eyebrow">03</span>
-      <h2 class="outline-text">Music</h2>
-    </div>
-    <div class="track-list">
-      <div class="track">
-        <span class="track-title">Fear of Abandonment</span>
-        <audio controls src="audio/track1.mp3"></audio>
-      </div>
-      <div class="track">
-        <span class="track-title">Just Like Life</span>
-        <audio controls src="audio/track2.mp3"></audio>
-      </div>
-      <div class="track">
-        <span class="track-title">Linger</span>
-        <audio controls src="audio/track3.mp3"></audio>
-      </div>
     </div>
   </section>
 
