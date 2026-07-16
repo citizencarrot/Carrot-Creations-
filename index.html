@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ashlynn — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500&family=Space+Grotesk:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1d2951;
+    --navy-deep:#131c3d;
+    --pink:#e6386f;
+    --orange:#c1592c;
+    --cream:#f4ead6;
+    --paper:#faf3e6;
+    --ink:#2a2420;
+    --brass:#b08d4f;
+    --eggplant:#4A1E3D;
+    --pine:#1F3A2E;
+    --sage:#A8B84A;
+    --gold:#C9A227;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Space Grotesk', sans-serif;
+    -webkit-font-smoothing:antialiased;
+    background-image:
+      radial-gradient(circle at 8% 12%, rgba(230,56,111,0.05) 0, transparent 9%),
+      radial-gradient(circle at 92% 30%, rgba(31,58,46,0.06) 0, transparent 10%),
+      radial-gradient(circle at 20% 85%, rgba(193,89,44,0.06) 0, transparent 11%),
+      radial-gradient(circle at 75% 92%, rgba(74,30,61,0.06) 0, transparent 10%),
+      radial-gradient(circle at 55% 55%, rgba(168,184,74,0.05) 0, transparent 12%);
+  }
+
+  .outline-text{
+    -webkit-text-stroke:1px var(--ink);
+    text-shadow:
+      -1px -1px 0 var(--paper), 1px -1px 0 var(--paper),
+      -1px 1px 0 var(--paper), 1px 1px 0 var(--paper);
+  }
+  .hero .outline-text{
+    -webkit-text-stroke:1.5px var(--navy-deep);
+    text-shadow:
+      -1.5px -1.5px 0 var(--cream), 1.5px -1.5px 0 var(--cream),
+      -1.5px 1.5px 0 var(--cream), 1.5px 1.5px 0 var(--cream);
+  }
+
+  ::selection{ background:var(--pink); color:var(--paper); }
+
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    margin:0;
+    line-height:1.05;
+  }
+
+  .eyebrow{
+    font-family:'Space Mono', monospace;
+    text-transform:uppercase;
+    letter-spacing:0.18em;
+    font-size:0.72rem;
+    color:var(--orange);
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:
+      linear-gradient(rgba(19,28,61,0.82), rgba(19,28,61,0.9)),
+      url('images/img12.jpg'),
+      radial-gradient(circle at 15% 20%, rgba(230,56,111,0.22), transparent 45%),
+      radial-gradient(circle at 85% 15%, rgba(193,89,44,0.22), transparent 45%),
+      radial-gradient(circle at 25% 90%, rgba(74,30,61,0.3), transparent 45%),
+      radial-gradient(circle at 90% 85%, rgba(168,184,74,0.2), transparent 45%),
+      var(--navy);
+    background-size:cover;
+    background-position:center;
+    color:var(--cream);
+    padding:5.5rem 6vw 4.5rem;
+    position:relative;
+    overflow:hidden;
+    border-bottom:6px solid var(--orange);
+  }
+  .hero::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:
+      repeating-linear-gradient(45deg, rgba(244,234,214,0.035) 0 2px, transparent 2px 14px);
+    pointer-events:none;
+  }
+  .hero-inner{ max-width:900px; position:relative; }
+  .hero h1{
+    font-size:clamp(2.6rem, 6vw, 4.6rem);
+    margin-top:0.6rem;
+    letter-spacing:-0.01em;
+  }
+  .hero .tagline{
+    font-size:clamp(1.05rem, 2vw, 1.3rem);
+    max-width:640px;
+    margin-top:1.4rem;
+    color:#e8dcc4;
+    font-weight:400;
+  }
+  .hero-tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0.6rem;
+    margin-top:2.2rem;
+  }
+  .tag{
+    font-family:'Space Mono', monospace;
+    font-size:0.75rem;
+    padding:0.35rem 0.8rem;
+    border:1px solid rgba(244,234,214,0.35);
+    border-radius:100px;
+    color:var(--cream);
+  }
+  .tag:nth-child(3n+1){ border-color:var(--pink); color:var(--pink); }
+  .tag:nth-child(3n+2){ border-color:var(--brass); color:var(--brass); }
+
+  /* ---------- SECTION SHELL ---------- */
+  section{
+    padding:4.5rem 6vw;
+    max-width:1200px;
+    margin:0 auto;
+    position:relative;
+  }
+  section::before{
+    content:"";
+    position:absolute;
+    top:0; left:-4vw; right:-4vw; bottom:0;
+    z-index:-1;
+    opacity:0.5;
+    background-image:
+      radial-gradient(circle, var(--sage) 2px, transparent 2.4px),
+      radial-gradient(circle, var(--pink) 2px, transparent 2.4px),
+      radial-gradient(circle, var(--gold) 2px, transparent 2.4px);
+    background-size: 46px 46px, 74px 74px, 60px 60px;
+    background-position: 0 0, 20px 35px, 45px 10px;
+  }
+  #gallery::before{
+    background-image:
+      radial-gradient(circle, var(--orange) 2px, transparent 2.4px),
+      radial-gradient(circle, var(--eggplant) 2px, transparent 2.4px),
+      radial-gradient(circle, var(--pine) 2px, transparent 2.4px);
+  }
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    gap:1rem;
+    margin-bottom:2.2rem;
+    border-bottom:2px dashed rgba(42,36,32,0.25);
+    padding-bottom:1rem;
+  }
+  .section-head h2{
+    font-size:clamp(1.7rem, 3vw, 2.3rem);
+  }
+
+  .checker-strip{
+    height:16px;
+    width:100%;
+    background:
+      repeating-conic-gradient(var(--pink) 0% 25%, var(--orange) 0% 50%)
+      0 0/32px 32px;
+  }
+  .checker-strip.alt{
+    background:
+      repeating-conic-gradient(var(--pine) 0% 25%, var(--eggplant) 0% 50%)
+      0 0/28px 28px;
+  }
+
+  /* ---------- BUILT WITH CLAUDE ---------- */
+  .build-card{
+    background:var(--cream);
+    border:3px solid var(--ink);
+    border-radius:10px;
+    padding:2.2rem;
+    box-shadow:6px 6px 0 rgba(29,41,81,0.18);
+    margin-bottom:1.8rem;
+    position:relative;
+    overflow:hidden;
+  }
+  .build-card::before{
+    content:"";
+    position:absolute;
+    top:0; left:0;
+    width:8px; height:100%;
+    background:var(--navy);
+  }
+  .build-card::after{
+    content:"";
+    position:absolute;
+    top:-30px; right:-30px;
+    width:110px; height:110px;
+    border-radius:50%;
+    opacity:0.5;
+  }
+  .build-card:nth-of-type(6n+1)::before{ background:var(--navy); }
+  .build-card:nth-of-type(6n+1)::after{ background:radial-gradient(circle, rgba(29,41,81,0.16), transparent 70%); }
+  .build-card:nth-of-type(6n+2)::before{ background:var(--pink); }
+  .build-card:nth-of-type(6n+2)::after{ background:radial-gradient(circle, rgba(230,56,111,0.18), transparent 70%); }
+  .build-card:nth-of-type(6n+3)::before{ background:var(--pine); }
+  .build-card:nth-of-type(6n+3)::after{ background:radial-gradient(circle, rgba(31,58,46,0.18), transparent 70%); }
+  .build-card:nth-of-type(6n+4)::before{ background:var(--orange); }
+  .build-card:nth-of-type(6n+4)::after{ background:radial-gradient(circle, rgba(193,89,44,0.18), transparent 70%); }
+  .build-card:nth-of-type(6n+5)::before{ background:var(--eggplant); }
+  .build-card:nth-of-type(6n+5)::after{ background:radial-gradient(circle, rgba(74,30,61,0.18), transparent 70%); }
+  .build-card:nth-of-type(6n+6)::before{ background:var(--gold); }
+  .build-card:nth-of-type(6n+6)::after{ background:radial-gradient(circle, rgba(201,162,39,0.2), transparent 70%); }
+  .build-card h3{
+    font-size:1.4rem;
+    margin-bottom:0.6rem;
+    padding-left:0.6rem;
+  }
+  .build-card p{ padding-left:0.6rem; line-height:1.6; max-width:640px; }
+  .build-meta{
+    font-family:'Space Mono', monospace;
+    font-size:0.72rem;
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+    color:var(--orange);
+    padding-left:0.6rem;
+    margin-bottom:0.6rem;
+    display:block;
+  }
+
+  .chart-wrap{
+    margin:1.6rem 0 0.6rem 0.6rem;
+    overflow-x:auto;
+    border:1px solid rgba(42,36,32,0.15);
+    border-radius:3px;
+  }
+  table{
+    border-collapse:collapse;
+    width:100%;
+    min-width:520px;
+    font-family:'Space Mono', monospace;
+    font-size:0.78rem;
+  }
+  thead th{
+    background:var(--navy);
+    color:var(--cream);
+    text-align:left;
+    padding:0.6rem 0.8rem;
+    font-weight:700;
+  }
+  tbody td{
+    padding:0.55rem 0.8rem;
+    border-bottom:1px solid rgba(42,36,32,0.1);
+  }
+  tbody tr:nth-child(even){ background:rgba(29,41,81,0.04); }
+  tbody th{
+    text-align:left;
+    padding:0.55rem 0.8rem;
+    border-bottom:1px solid rgba(42,36,32,0.1);
+    color:var(--pink);
+    font-weight:700;
+    background:rgba(230,56,111,0.06);
+  }
+  .chart-caption{
+    padding-left:0.6rem;
+    font-size:0.85rem;
+    color:#4a3a2e;
+    font-weight:500;
+    margin-top:0.6rem;
+    font-style:italic;
+  }
+
+  .placeholder-card{
+    border:2px dashed rgba(42,36,32,0.25);
+    border-radius:4px;
+    padding:1.6rem 2.2rem;
+    color:#4a3a2e;
+    font-style:italic;
+  }
+
+  .herb-sheets{
+    display:flex;
+    gap:1rem;
+    margin:1.4rem 0 0.3rem 0.6rem;
+    flex-wrap:wrap;
+  }
+  .herb-sheet-slot{
+    width:190px;
+    height:250px;
+    border:2px dashed rgba(42,36,32,0.3);
+    border-radius:6px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    gap:0.4rem;
+    padding:1rem;
+    color:#8a7d6d;
+    font-size:0.8rem;
+    background:rgba(42,36,32,0.03);
+  }
+  .herb-sheet-slot strong{
+    font-family:'Fraunces', serif;
+    color:var(--navy);
+    font-size:0.95rem;
+  }
+  .herb-sheet-slot img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:4px;
+  }
+
+  .herb-sheet{
+    width:210px;
+    border:3px solid var(--ink);
+    border-radius:8px;
+    overflow:hidden;
+    box-shadow:4px 4px 0 rgba(0,0,0,0.2);
+    background:var(--paper);
+  }
+  .herb-sheet-head{
+    background:var(--navy);
+    color:var(--cream);
+    padding:0.7rem 0.9rem 0.6rem;
+  }
+  .herb-sheet-num{
+    font-family:'Space Mono', monospace;
+    font-size:0.62rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--brass);
+  }
+  .herb-sheet-title{
+    font-family:'Fraunces', serif;
+    font-size:1.05rem;
+    margin-top:0.15rem;
+  }
+  .herb-sheet-body{
+    padding:0.8rem 0.9rem;
+  }
+  .herb-sheet-label{
+    font-family:'Space Mono', monospace;
+    font-size:0.62rem;
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+    color:var(--orange);
+    margin-bottom:0.4rem;
+    display:block;
+  }
+  .herb-sheet-actives{
+    font-size:0.78rem;
+    line-height:1.5;
+    color:var(--ink);
+  }
+  .herb-sheet-more{
+    font-size:0.72rem;
+    color:#9a927c;
+    font-style:italic;
+    margin-top:0.3rem;
+  }
+  .herb-sheet-notes{
+    margin-top:0.7rem;
+    border-top:1px dashed rgba(42,36,32,0.2);
+    padding-top:0.5rem;
+    height:36px;
+  }
+
+  .herb-collage{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0.7rem;
+    margin:1.4rem 0 0.4rem 0.6rem;
+  }
+  .herb-chip{
+    font-family:'Space Mono', monospace;
+    font-size:0.8rem;
+    padding:0.6rem 1rem;
+    border-radius:3px;
+    color:var(--paper);
+    box-shadow:0 4px 10px rgba(0,0,0,0.18);
+  }
+  .herb-chip:nth-child(6n+1){ background:var(--navy); transform:rotate(-2deg); }
+  .herb-chip:nth-child(6n+2){ background:var(--pink); transform:rotate(1.5deg); }
+  .herb-chip:nth-child(6n+3){ background:var(--orange); transform:rotate(-1deg); }
+  .herb-chip:nth-child(6n+4){ background:#1F3A2E; transform:rotate(2deg); }
+  .herb-chip:nth-child(6n+5){ background:var(--brass); color:var(--navy-deep); transform:rotate(-1.5deg); }
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:1.5rem;
+    flex-wrap:wrap;
+  }
+  .swatch-strip{
+    display:flex;
+    gap:6px;
+    margin-top:0.9rem;
+    padding-left:0.6rem;
+  }
+  .swatch-strip span{
+    width:26px; height:26px;
+    border-radius:50%;
+    display:inline-block;
+    box-shadow:0 2px 4px rgba(0,0,0,0.2);
+  }
+  .view-link{
+    font-family:'Space Mono', monospace;
+    font-size:0.78rem;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    color:var(--paper);
+    background:var(--navy);
+    padding:0.7rem 1.2rem;
+    border-radius:100px;
+    text-decoration:none;
+    white-space:nowrap;
+    transition:background 0.2s ease;
+  }
+  .view-link:hover{ background:var(--pink); }
+
+  /* ---------- CASH TRACKER DEMO (self-contained styling) ---------- */
+  .trk-frame{
+    margin:1.6rem 0.6rem 0.4rem;
+    border-radius:14px;
+    border:3px solid var(--ink);
+    overflow:hidden;
+    box-shadow:6px 6px 0 rgba(0,0,0,0.2);
+    max-width:420px;
+    font-family:'Inter', sans-serif;
+  }
+  .trk-header{ background:#1F3A2E; padding:24px 22px 34px; position:relative; }
+  .trk-eyebrow{ display:flex; align-items:center; gap:6px; color:#C9A227; font-family:'Space Mono', monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; }
+  .trk-balance{ color:#FAF7EF; font-family:'Fraunces', serif; font-weight:700; font-size:34px; margin-top:6px; line-height:1; }
+  .trk-stats{ display:flex; gap:18px; margin-top:14px; }
+  .trk-stats span{ color:#9FB8A8; font-size:12px; display:flex; align-items:center; gap:5px; }
+  .trk-in{ color:#C9A227; }
+  .trk-out{ color:#D98A7A; }
+  .trk-body{ background:#FAF7EF; padding:16px 18px 90px; position:relative; }
+  .trk-empty{ text-align:center; color:#8A8474; font-size:13px; margin-top:24px; }
+  .trk-row{ display:flex; justify-content:space-between; align-items:center; padding:10px 2px; border-bottom:1px dashed #DDD5C0; }
+  .trk-row-cat{ font-weight:600; font-size:13px; color:#2A2A22; }
+  .trk-row-meta{ font-size:11px; color:#9A927C; margin-top:2px; }
+  .trk-row-amt{ font-family:'Space Mono', monospace; font-weight:600; font-size:14px; }
+  .trk-amt-in{ color:#3D6B4F; }
+  .trk-amt-out{ color:#B0554A; }
+  .trk-del{ background:none; border:none; cursor:pointer; color:#C4BBA3; padding:3px; margin-left:8px; }
+  .trk-addbtn{ position:absolute; bottom:16px; left:18px; right:18px; background:#1F3A2E; color:#FAF7EF; border:none; border-radius:12px; padding:13px; font-size:14px; font-weight:600; cursor:pointer; }
+  .trk-form{ display:none; padding:16px 18px 20px; background:#F0EBDD; border-top:1px solid #DDD5C0; }
+  .trk-form.open{ display:block; }
+  .trk-toggle{ display:flex; gap:8px; margin-bottom:12px; }
+  .trk-toggle button{ flex:1; padding:9px; border-radius:9px; border:1px solid #DDD5C0; background:#fff; font-weight:600; font-size:13px; cursor:pointer; }
+  .trk-toggle button.active{ background:#1F3A2E; color:#FAF7EF; border-color:#1F3A2E; }
+  .trk-form label{ font-size:11px; color:#8A8474; font-weight:600; display:block; margin-top:10px; }
+  .trk-form input, .trk-form select{ width:100%; padding:10px; font-size:13px; border:1px solid #DDD5C0; border-radius:8px; margin-top:5px; font-family:'Inter',sans-serif; }
+  .trk-save{ width:100%; margin-top:14px; background:#C9A227; color:#1F3A2E; border:none; border-radius:10px; padding:12px; font-weight:700; font-size:14px; cursor:pointer; }
+  .trk-caption{ padding-left:0.6rem; font-size:0.85rem; color:#5a5148; margin-top:0.9rem; font-style:italic; }
+
+  /* ---------- GALLERY / COLLAGE ---------- */
+  .gallery-intro{
+    max-width:640px;
+    margin-bottom:2.5rem;
+    line-height:1.6;
+  }
+  .collage{
+    display:grid;
+    grid-template-columns:repeat(6, 1fr);
+    grid-auto-rows:80px;
+    grid-auto-flow:dense;
+    gap:5px;
+  }
+  .collage img{
+    display:block;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:2px;
+    filter:saturate(0.88) brightness(0.97);
+    opacity:0.94;
+  }
+  .c-lg{ grid-column:span 2; grid-row:span 2; }
+  .c-wide{ grid-column:span 2; grid-row:span 1; }
+  .c-tall{ grid-column:span 1; grid-row:span 2; }
+  .c-sm{ grid-column:span 1; grid-row:span 1; }
+
+  .collage-note{
+    grid-column:3 / span 2;
+    grid-row:3 / span 2;
+    z-index:3;
+    background:var(--cream);
+    border:2px solid var(--navy);
+    box-shadow:0 10px 24px rgba(29,41,81,0.25);
+    padding:1.6rem;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+  }
+  .collage-note p{
+    font-family:'Fraunces', serif;
+    font-size:1.05rem;
+    line-height:1.4;
+    font-weight:500;
+    color:var(--navy);
+    margin:0;
+  }
+  @media (max-width:640px){
+    .collage{ grid-template-columns:repeat(3, 1fr); grid-auto-rows:70px; }
+    .collage-note{ grid-column:1 / span 3; grid-row:span 2; }
+    .c-lg, .c-wide{ grid-column:span 2; }
+  }
+
+  /* ---------- MUSIC ---------- */
+  .track-list{
+    display:flex;
+    flex-direction:column;
+    gap:0.9rem;
+  }
+  .track{
+    background:var(--navy);
+    color:var(--cream);
+    border-radius:4px;
+    padding:1.1rem 1.4rem;
+    display:flex;
+    flex-direction:column;
+    gap:0.6rem;
+  }
+  .track-title{
+    font-family:'Fraunces', serif;
+    font-size:1.15rem;
+    color:var(--pink);
+  }
+  audio{
+    width:100%;
+    height:36px;
+  }
+
+  footer{
+    padding:3rem 6vw 4rem;
+    background:var(--navy-deep);
+    color:#cbbfa4;
+    font-family:'Space Mono', monospace;
+    font-size:0.8rem;
+    text-align:center;
+    letter-spacing:0.04em;
+  }
+
+  @media (max-width:600px){
+    section{ padding:3rem 5vw; }
+    .hero{ padding:4rem 5vw 3rem; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="hero">
+    <div class="hero-inner">
+      <span class="eyebrow">Portfolio — Claude Corps Fellow Application</span>
+      <h1 class="outline-text">Ashlynn</h1>
+      <p class="tagline">Florist by trade, builder in progress. Painting, collage, photography, and music running alongside a fast-growing habit of organizing, systems, and getting things done with Claude.</p>
+      <div class="hero-tags">
+        <span class="tag outline-text">Painting</span>
+        <span class="tag outline-text">Collage</span>
+        <span class="tag outline-text">Photography</span>
+        <span class="tag outline-text">Music</span>
+        <span class="tag outline-text">Organizing</span>
+        <span class="tag outline-text">New to AI — one week in</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="checker-strip"></div>
+
+  <section id="built">
+    <div class="section-head">
+      <span class="eyebrow">01</span>
+      <h2 class="outline-text">Built with Claude</h2>
+    </div>
+
+    <div class="build-card">
+      <span class="build-meta">Organizing tool · Comparison chart</span>
+      <h3 class="outline-text">Astrology Comparison Chart</h3>
+      <p>Friends' birth chart data was scattered across more than a dozen different apps. I used Claude to pull all of it into one side-by-side comparison table — planets, signs, degrees, and retrogrades — so I can actually spot patterns across everyone's charts at a glance instead of flipping between screens.</p>
+      <div class="chart-wrap">
+        <table>
+          <thead>
+            <tr><th>Planet</th><th>You</th><th>Jared</th><th>Cris</th><th>Christy</th></tr>
+          </thead>
+          <tbody>
+            <tr><th>Sun</th><td>Libra, 24°20'</td><td>Leo, 14°19'</td><td>Pisces, 12°23'</td><td>Taurus, 1°14'</td></tr>
+            <tr><th>Moon</th><td>Scorpio, 5°53'</td><td>Pisces, 11°32'</td><td>Gemini, 10°9'</td><td>Cancer, 18°31'</td></tr>
+            <tr><th>Mercury</th><td>Libra, 16°50' R</td><td>Leo, 15°14'</td><td>Aquarius, 16°48'</td><td>Aries, 4°22'</td></tr>
+            <tr><th>Venus</th><td>Libra, 2°42'</td><td>Cancer, 6°2'</td><td>Aries, 16°59'</td><td>Gemini, 10°47'</td></tr>
+            <tr><th>Mars</th><td>Capricorn, 23°13'</td><td>Sagittarius, 17°15'</td><td>Sagittarius, 8°7'</td><td>Scorpio, 5°11' R</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="chart-caption">Excerpt shown — the full comparison spans 12 people across 3 pages.</p>
+    </div>
+
+    <div class="build-card">
+      <span class="build-meta">Reference guide · Self-teaching workbook</span>
+      <h3 class="outline-text">Astrology Guidebook</h3>
+      <p>The comparison chart told me <em>what</em> everyone's placements are — this is where I built the <em>why</em>. A guidebook covering whole sign houses, the twelve houses, and synastry, using my own chart and a fully worked synastry example (me &amp; Jared) to actually learn the system, not just look things up. It ends with a worksheet set up to repeat the exercise across my other ten friends' charts.</p>
+      <div class="chart-wrap">
+        <table>
+          <thead>
+            <tr><th>House</th><th>Sign</th><th>Your planets here</th></tr>
+          </thead>
+          <tbody>
+            <tr><th>1st</th><td>Sagittarius</td><td>Pluto, Pallas A., Chiron</td></tr>
+            <tr><th>7th</th><td>Gemini</td><td>Saturn R, Node R</td></tr>
+            <tr><th>11th</th><td>Libra</td><td>Sun, Mercury R, Venus</td></tr>
+            <tr><th>12th</th><td>Scorpio</td><td>Moon</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="chart-caption">Excerpt of the whole sign house reference — full guidebook covers all 12 houses plus the worked synastry example.</p>
+    </div>
+
+    <div class="build-card">
+      <span class="build-meta">Study worksheets · Supply planner</span>
+      <h3 class="outline-text">Herb Worksheets</h3>
+      <p>Working through my herbal medicine studies one category at a time — each worksheet lists the active herbs for a health focus, doubling as a shopping list so I can pace myself on what to gather instead of buying everything at once.</p>
+      <div class="herb-sheets">
+        <div class="herb-sheet">
+          <div class="herb-sheet-head">
+            <span class="herb-sheet-num">Worksheet No. 2</span>
+            <div class="herb-sheet-title">PCOS / Yoni / Hormones</div>
+          </div>
+          <div class="herb-sheet-body">
+            <span class="herb-sheet-label">Actives</span>
+            <div class="herb-sheet-actives">Fenugreek, Shepherd's Purse, Lady's Mantle, White Oak Bark, Bayberry Root Bark, Mugwort, Plantain Leaf, Bethroot</div>
+            <div class="herb-sheet-notes"></div>
+          </div>
+        </div>
+        <div class="herb-sheet">
+          <div class="herb-sheet-head">
+            <span class="herb-sheet-num">Worksheet No. 4</span>
+            <div class="herb-sheet-title">Stomach</div>
+          </div>
+          <div class="herb-sheet-body">
+            <span class="herb-sheet-label">Actives</span>
+            <div class="herb-sheet-actives">Cabbage (juice), Licorice, Honey, Garlic, Turmeric, Mastic, Chili Peppers, Slippery Elm, Peppermint, Aloe Vera, Calendula</div>
+            <div class="herb-sheet-more">+ 37 more on the full sheet</div>
+            <div class="herb-sheet-notes"></div>
+          </div>
+        </div>
+      </div>
+      <div class="herb-collage">
+        <span class="herb-chip">Lung Health</span>
+        <span class="herb-chip">Gut Health &amp; BP</span>
+        <span class="herb-chip">Hair Growth</span>
+        <span class="herb-chip">Liver Function</span>
+      </div>
+      <p class="chart-caption">One worksheet per category — a way to work through the overwhelm of too many study options, one at a time instead of all at once.</p>
+    </div>
+
+    <div class="build-card">
+      <span class="build-meta">React component · Personal finance tool</span>
+      <h3 class="outline-text">Cash Ledger</h3>
+      <p>A florist's income comes in unpredictable chunks — tips, transfers, the occasional paycheck. I built this with Claude to log every dollar in and out by category, in the same visual language as the rest of my work, so I stop losing track between apps. Try it below — it's fully working.</p>
+
+      <div class="trk-frame">
+        <div class="trk-header">
+          <div class="trk-eyebrow">🧾 Cash Ledger</div>
+          <div class="trk-balance" id="trkBalance">$0.00</div>
+          <div class="trk-stats">
+            <span class="trk-in">▲ $0.00 in</span>
+            <span class="trk-out">▼ $0.00 out</span>
+          </div>
+        </div>
+        <div class="trk-body">
+          <div id="trkList"><div class="trk-empty">No entries yet. Log your first payment or expense below.</div></div>
+          <button class="trk-addbtn" id="trkAddBtn">+ Add entry</button>
+        </div>
+        <div class="trk-form" id="trkForm">
+          <div class="trk-toggle">
+            <button type="button" class="active" data-type="income">Income</button>
+            <button type="button" data-type="expense">Expense</button>
+          </div>
+          <label>Amount</label>
+          <input type="number" id="trkAmount" placeholder="0.00" inputmode="decimal">
+          <label>Category</label>
+          <select id="trkCategory">
+            <option>Paycheck</option><option>Tips</option><option>Transfer In</option>
+            <option>Bills</option><option>Supplies</option><option>Food</option>
+            <option>Music/Gear</option><option>Other</option>
+          </select>
+          <label>Note (optional)</label>
+          <input type="text" id="trkNote" placeholder="e.g. flower supplies">
+          <button class="trk-save" id="trkSave">Save entry</button>
+        </div>
+      </div>
+      <p class="trk-caption">This demo saves to your browser only — it's just here to show the tool working.</p>
+    </div>
+
+    <div class="build-card link-card">
+      <div>
+        <span class="build-meta">Design system · Living reference</span>
+        <h3 style="padding-left:0.6rem;">Style Moodboard</h3>
+        <p style="padding-left:0.6rem;">The eclectic vintage jewel-tone palette and pattern language behind the Cash Ledger — and this page. Built with Claude to keep every chart, form, and tracker visually consistent.</p>
+        <div class="swatch-strip">
+          <span style="background:#4A1E3D"></span>
+          <span style="background:#C9A227"></span>
+          <span style="background:#D6408A"></span>
+          <span style="background:#C4642F"></span>
+          <span style="background:#1F3A2E"></span>
+          <span style="background:#1B2A4A"></span>
+        </div>
+      </div>
+      <a class="view-link" href="moodboard.html" target="_blank" rel="noopener">View moodboard →</a>
+    </div>
+
+    <div class="placeholder-card">
+      More builds coming soon.
+    </div>
+  </section>
+
+  <script>
+    (function(){
+      const KEY = 'ashlynn-portfolio-cash-demo';
+      let entries = [];
+      try { entries = JSON.parse(localStorage.getItem(KEY) || '[]'); } catch(e){ entries = []; }
+      let currentType = 'income';
+
+      const money = n => n.toLocaleString('en-US', { style:'currency', currency:'USD' });
+      const listEl = document.getElementById('trkList');
+      const balEl = document.getElementById('trkBalance');
+      const statsEl = document.querySelector('.trk-stats');
+      const form = document.getElementById('trkForm');
+      const addBtn = document.getElementById('trkAddBtn');
+
+      function render(){
+        const balance = entries.reduce((s,e)=> s + (e.type==='income'? e.amount : -e.amount), 0);
+        const totalIn = entries.filter(e=>e.type==='income').reduce((s,e)=>s+e.amount,0);
+        const totalOut = entries.filter(e=>e.type==='expense').reduce((s,e)=>s+e.amount,0);
+        balEl.textContent = money(balance);
+        statsEl.innerHTML = `<span class="trk-in">▲ ${money(totalIn)} in</span><span class="trk-out">▼ ${money(totalOut)} out</span>`;
+
+        if(entries.length === 0){
+          listEl.innerHTML = '<div class="trk-empty">No entries yet. Log your first payment or expense below.</div>';
+          return;
+        }
+        const sorted = [...entries].sort((a,b)=> b.id - a.id);
+        listEl.innerHTML = sorted.map(e => `
+          <div class="trk-row">
+            <div>
+              <div class="trk-row-cat">${e.category}</div>
+              <div class="trk-row-meta">${e.date}${e.note ? ' · ' + e.note : ''}</div>
+            </div>
+            <div style="display:flex;align-items:center;">
+              <div class="trk-row-amt ${e.type==='income'?'trk-amt-in':'trk-amt-out'}">${e.type==='income'?'+':'−'}${money(e.amount)}</div>
+              <button class="trk-del" data-id="${e.id}" aria-label="Delete entry">✕</button>
+            </div>
+          </div>
+        `).join('');
+
+        listEl.querySelectorAll('.trk-del').forEach(btn=>{
+          btn.addEventListener('click', ()=>{
+            entries = entries.filter(e => e.id !== Number(btn.dataset.id));
+            localStorage.setItem(KEY, JSON.stringify(entries));
+            render();
+          });
+        });
+      }
+
+      addBtn.addEventListener('click', ()=> form.classList.add('open'));
+
+      document.querySelectorAll('.trk-toggle button').forEach(btn=>{
+        btn.addEventListener('click', ()=>{
+          document.querySelectorAll('.trk-toggle button').forEach(b=>b.classList.remove('active'));
+          btn.classList.add('active');
+          currentType = btn.dataset.type;
+        });
+      });
+
+      document.getElementById('trkSave').addEventListener('click', ()=>{
+        const amt = parseFloat(document.getElementById('trkAmount').value);
+        if(!amt || amt <= 0) return;
+        entries.push({
+          id: Date.now(),
+          type: currentType,
+          amount: amt,
+          category: document.getElementById('trkCategory').value,
+          note: document.getElementById('trkNote').value,
+          date: new Date().toISOString().slice(0,10)
+        });
+        localStorage.setItem(KEY, JSON.stringify(entries));
+        document.getElementById('trkAmount').value = '';
+        document.getElementById('trkNote').value = '';
+        form.classList.remove('open');
+        render();
+      });
+
+      render();
+    })();
+  </script>
+
+  <section id="gallery">
+    <div class="section-head">
+      <span class="eyebrow">02</span>
+      <h2 class="outline-text">Photography</h2>
+    </div>
+    <p class="gallery-intro">A running collection straight from my camera roll — moments, textures, and light I didn't want to lose track of.</p>
+    <div class="collage">
+      <div class="collage-note"><p>The artistry lives in the everyday — this is the eye behind the paintings and collages.</p></div>
+      <div class="c-lg"><img src="images/img01.jpg" alt=""></div>
+      <div class="c-sm"><img src="images/img02.jpg" alt=""></div>
+      <div class="c-tall"><img src="images/img03.jpg" alt=""></div>
+      <div class="c-wide"><img src="images/img04.jpg" alt=""></div>
+      <div class="c-sm"><img src="images/img05.jpg" alt=""></div>
+      <div class="c-sm"><img src="images/img06.jpg" alt=""></div>
+      <div class="c-tall"><img src="images/img07.jpg" alt=""></div>
+      <div class="c-sm"><img src="images/img08.jpg" alt=""></div>
+      <div class="c-wide"><img src="images/img09.jpg" alt=""></div>
+      <div class="c-sm"><img src="images/img10.jpg" alt=""></div>
+      <div class="c-lg"><img src="images/img11.jpg" alt=""></div>
+      <div class="c-sm"><img src="images/img12.jpg" alt=""></div>
+      <div class="c-sm"><img src="images/img13.jpg" alt=""></div>
+      <div class="c-tall"><img src="images/img14.jpg" alt=""></div>
+      <div class="c-wide"><img src="images/img15.jpg" alt=""></div>
+      <div class="c-sm"><img src="images/img16.jpg" alt=""></div>
+      <div class="c-sm"><img src="images/img17.jpg" alt=""></div>
+      <div class="c-tall"><img src="images/img18.jpg" alt=""></div>
+      <div class="c-sm"><img src="images/img19.jpg" alt=""></div>
+      <div class="c-wide"><img src="images/img20.jpg" alt=""></div>
+    </div>
+  </section>
+
+  <div class="checker-strip alt"></div>
+
+  <section id="music">
+    <div class="section-head">
+      <span class="eyebrow">03</span>
+      <h2 class="outline-text">Music</h2>
+    </div>
+    <div class="track-list">
+      <div class="track">
+        <span class="track-title">Fear of Abandonment</span>
+        <audio controls src="audio/track1.mp3"></audio>
+      </div>
+      <div class="track">
+        <span class="track-title">Just Like Life</span>
+        <audio controls src="audio/track2.mp3"></audio>
+      </div>
+      <div class="track">
+        <span class="track-title">Linger</span>
+        <audio controls src="audio/track3.mp3"></audio>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Ashlynn — Painter · Collage Artist · Photographer · Musician · Florist — built with Claude, one week in.
+  </footer>
+
+</body>
+</html>
