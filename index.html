@@ -242,17 +242,17 @@
 
   .chart-wrap{
     margin:1.6rem 0 0.6rem 0.6rem;
-    overflow-x:auto;
     border:1px solid rgba(42,36,32,0.15);
     border-radius:3px;
   }
   table{
     border-collapse:collapse;
     width:100%;
-    min-width:520px;
+    table-layout:fixed;
     font-family:'Space Mono', monospace;
-    font-size:0.78rem;
+    font-size:clamp(0.55rem, 2.1vw, 0.78rem);
   }
+  th, td{ overflow-wrap:break-word; }
   thead th{
     background:var(--navy);
     color:var(--cream);
@@ -379,7 +379,98 @@
     height:36px;
   }
 
-  .herb-collage{
+  .herbals-card{
+    background:
+      radial-gradient(circle at 15% 20%, rgba(18,84,62,0.58), transparent 55%),
+      radial-gradient(circle at 85% 15%, rgba(102,62,32,0.5), transparent 55%),
+      radial-gradient(circle at 20% 85%, rgba(120,165,178,0.55), transparent 55%),
+      radial-gradient(circle at 80% 80%, rgba(18,84,62,0.42), transparent 55%),
+      var(--paper);
+    filter:saturate(1.4);
+    border-radius:38% 42% 40% 44% / 6% 6% 8% 8%;
+    border:4px solid var(--ink);
+    padding:2.4rem 2rem 2rem;
+    margin:1.6rem 0.6rem 0.6rem;
+    position:relative;
+  }
+  .herbals-title-wrap{ text-align:center; margin-bottom:1.6rem; }
+  .herbals-title{
+    font-family:'Fraunces', serif;
+    font-size:1.8rem;
+    color:var(--ink);
+    display:inline-block;
+  }
+  .herbals-tick{
+    display:block;
+    width:70px; height:10px;
+    margin:0.3rem auto 0;
+    background:
+      linear-gradient(115deg, transparent 45%, var(--ink) 45%, var(--ink) 55%, transparent 55%),
+      linear-gradient(115deg, transparent 45%, var(--ink) 45%, var(--ink) 55%, transparent 55%);
+    background-size:12px 100%, 12px 100%;
+    background-position:30% 0, 45% 0;
+    background-repeat:no-repeat;
+    border-top:3px solid var(--ink);
+  }
+  .herbals-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1.1rem;
+    max-width:380px;
+    margin:0 auto;
+  }
+  .herb-box{
+    background:var(--paper);
+    border:3px solid var(--ink);
+    border-radius:4px;
+    padding:1rem 0.6rem;
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:1.1rem;
+    color:var(--eggplant);
+    text-align:center;
+    cursor:pointer;
+    box-shadow:3px 3px 0 rgba(0,0,0,0.2);
+    transition:transform 0.15s ease;
+  }
+  .herb-box:hover{ transform:translate(-2px,-2px); box-shadow:5px 5px 0 rgba(0,0,0,0.25); }
+  .herb-box span{ display:block; font-family:'Space Mono', monospace; font-size:0.65rem; color:var(--teal); margin-top:0.3rem; font-weight:400; }
+
+  .herb-modal{
+    display:none;
+    position:fixed; inset:0;
+    background:rgba(20,20,20,0.6);
+    z-index:50;
+    align-items:center; justify-content:center;
+    padding:1.2rem;
+  }
+  .herb-modal.open{ display:flex; }
+  .herb-modal-card{
+    background:var(--paper);
+    border:4px solid var(--ink);
+    border-radius:10px;
+    width:100%; max-width:480px;
+    max-height:85vh;
+    display:flex; flex-direction:column;
+    overflow:hidden;
+  }
+  .herb-modal-head{
+    display:flex; align-items:center; justify-content:space-between;
+    background:var(--eggplant); color:var(--cream);
+    padding:0.8rem 1rem;
+    font-family:'Fraunces', serif; font-size:1.1rem;
+  }
+  .herb-modal-close{
+    background:none; border:none; color:var(--cream); font-size:1.3rem; cursor:pointer; line-height:1;
+  }
+  .herb-modal-body{ flex:1; overflow:hidden; }
+  .herb-modal-body iframe{ width:100%; height:100%; border:none; min-height:400px; }
+  .herb-modal-save{
+    display:block; text-align:center;
+    background:var(--teal); color:var(--paper);
+    font-family:'Space Mono', monospace; font-size:0.8rem; text-transform:uppercase; letter-spacing:0.06em;
+    padding:0.8rem; text-decoration:none;
+  }
     display:flex;
     flex-wrap:wrap;
     gap:0.7rem;
@@ -474,76 +565,113 @@
     margin-bottom:2.5rem;
     line-height:1.6;
   }
-  .collage{
-    display:grid;
-    grid-template-columns:repeat(6, 1fr);
-    grid-auto-rows:80px;
-    grid-auto-flow:dense;
-    gap:5px;
+  .scrapbook-frame{
+    background:
+      repeating-linear-gradient(90deg, rgba(0,0,0,0.06) 0 2px, transparent 2px 26px),
+      linear-gradient(180deg, #a97c50, #8a5a34 60%, #6e4526);
+    border:10px solid var(--navy);
+    border-radius:14px;
+    padding:1.4rem;
+    position:relative;
+    box-shadow:0 14px 30px rgba(0,0,0,0.25);
+    max-width:480px;
+    margin:1.6rem auto 0;
   }
-  .collage img{
-    display:block;
+  .scrapbook-frame::before,
+  .scrapbook-frame::after{
+    content:"";
+    position:absolute;
+    width:16px; height:16px;
+    border-radius:50%;
+    box-shadow:
+      0 0 0 4px var(--pink),
+      24px 0 0 -1px var(--paper),
+      24px 0 0 3px var(--sage),
+      48px 0 0 -1px var(--pink),
+      48px 0 0 3px var(--pink);
+    top:-9px; left:20px;
+  }
+  .scrapbook-frame::after{ top:auto; bottom:-9px; left:auto; right:20px; }
+  .photo-window{
+    aspect-ratio:1/1;
+    width:100%;
+    background:var(--ink);
+    border:4px solid var(--paper);
+    border-radius:6px;
+    overflow-x:auto;
+    overflow-y:hidden;
+    display:flex;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+  }
+  .photo-window img{
+    scroll-snap-align:center;
+    flex:0 0 100%;
     width:100%;
     height:100%;
     object-fit:cover;
-    border-radius:2px;
-    filter:saturate(0.88) brightness(0.97);
-    opacity:0.94;
+    filter:saturate(0.92);
   }
-  .c-lg{ grid-column:span 2; grid-row:span 2; }
-  .c-wide{ grid-column:span 2; grid-row:span 1; }
-  .c-tall{ grid-column:span 1; grid-row:span 2; }
-  .c-sm{ grid-column:span 1; grid-row:span 1; }
+  .photo-window::-webkit-scrollbar{ height:8px; }
+  .photo-window::-webkit-scrollbar-thumb{ background:var(--pink); border-radius:4px; }
+  .scrapbook-caption{
+    text-align:center;
+    font-family:'Space Mono', monospace;
+    font-size:0.72rem;
+    color:var(--paper);
+    margin-top:0.7rem;
+    letter-spacing:0.05em;
+  }
 
-  .collage-note{
-    grid-column:3 / span 2;
-    grid-row:3 / span 2;
-    z-index:3;
-    background:var(--cream);
-    border:2px solid var(--navy);
-    box-shadow:0 10px 24px rgba(29,41,81,0.25);
-    padding:1.6rem;
+  /* ---------- MUSIC: BOOMBOX ---------- */
+  .boombox{
+    background:linear-gradient(180deg, #2b2b2e, #16161a);
+    border:4px solid #050505;
+    border-radius:20px;
+    padding:1.4rem;
+    max-width:460px;
+    margin:1.6rem auto 0;
+    box-shadow:0 16px 34px rgba(0,0,0,0.35), inset 0 0 0 3px #3a3a3e;
+  }
+  .boombox-handle{
+    width:70%;
+    height:14px;
+    margin:0 auto 1rem;
+    border:4px solid #050505;
+    border-bottom:none;
+    border-radius:14px 14px 0 0;
+  }
+  .boombox-unit{
     display:flex;
     align-items:center;
-    justify-content:center;
-    text-align:center;
+    gap:1rem;
+    background:#1c1c1f;
+    border-radius:12px;
+    padding:1rem;
+    margin-bottom:0.8rem;
   }
-  .collage-note p{
-    font-family:'Fraunces', serif;
-    font-size:1.05rem;
-    line-height:1.4;
-    font-weight:500;
-    color:var(--navy);
-    margin:0;
+  .boombox-speaker{
+    width:56px; height:56px; border-radius:50%;
+    background:radial-gradient(circle at 35% 35%, #4a4a4e, #0d0d0f 70%);
+    border:3px solid #050505;
+    flex-shrink:0;
   }
-  @media (max-width:640px){
-    .collage{ grid-template-columns:repeat(3, 1fr); grid-auto-rows:70px; }
-    .collage-note{ grid-column:1 / span 3; grid-row:span 2; }
-    .c-lg, .c-wide{ grid-column:span 2; }
+  .boombox-screen{
+    flex:1;
+    background:#0e1f16;
+    border:2px solid #050505;
+    border-radius:6px;
+    padding:0.6rem 0.8rem;
+    font-family:'Space Mono', monospace;
+    color:#7CFFB2;
   }
-
-  /* ---------- MUSIC ---------- */
-  .track-list{
-    display:flex;
-    flex-direction:column;
-    gap:0.9rem;
+  .boombox-track-name{ font-size:0.8rem; letter-spacing:0.04em; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .boombox-clock{ font-size:1.3rem; margin-top:0.2rem; letter-spacing:0.06em; }
+  .boombox-play{
+    width:44px; height:44px; border-radius:50%;
+    background:#C9A227; border:3px solid #050505; color:#050505;
+    font-size:1rem; cursor:pointer; flex-shrink:0;
   }
-  .track{
-    background:var(--navy);
-    color:var(--cream);
-    border-radius:4px;
-    padding:1.1rem 1.4rem;
-    display:flex;
-    flex-direction:column;
-    gap:0.6rem;
-  }
-  .track-title{
-    font-family:'Fraunces', serif;
-    font-size:1.15rem;
-    color:var(--pink);
-  }
-  audio{
-    width:100%;
     height:36px;
   }
 
@@ -573,6 +701,9 @@
       <div class="hero-tags">
         <span class="tag outline-text">Painting</span>
         <span class="tag outline-text">Collage</span>
+        <span class="tag outline-text">Photography</span>
+        <span class="tag outline-text">Music</span>
+        <span class="tag outline-text">Video</span>
         <span class="tag outline-text">Organizing</span>
         <span class="tag outline-text">New to AI — one week in</span>
       </div>
@@ -631,40 +762,49 @@
     <div class="build-card">
       <span class="build-meta">Study worksheets · Supply planner</span>
       <h3 class="outline-text">Herb Worksheets</h3>
-      <p>Working through my herbal medicine studies one category at a time — each worksheet lists the active herbs for a health focus, doubling as a shopping list so I can pace myself on what to gather instead of buying everything at once.</p>
-      <div class="herb-sheets">
-        <div class="herb-sheet">
-          <div class="herb-sheet-head">
-            <span class="herb-sheet-num">Worksheet No. 2</span>
-            <div class="herb-sheet-title">PCOS / Yoni / Hormones</div>
-          </div>
-          <div class="herb-sheet-body">
-            <span class="herb-sheet-label">Actives</span>
-            <div class="herb-sheet-actives">Fenugreek, Shepherd's Purse, Lady's Mantle, White Oak Bark, Bayberry Root Bark, Mugwort, Plantain Leaf, Bethroot</div>
-            <div class="herb-sheet-notes"></div>
-          </div>
+      <p>Working through my herbal medicine studies one category at a time. Tap a box to open that worksheet, close it to come back — a way to work through the overwhelm of too many study options, one at a time instead of all at once.</p>
+
+      <div class="herbals-card">
+        <div class="herbals-title-wrap">
+          <span class="herbals-title">Herbals</span>
+          <span class="herbals-tick"></span>
         </div>
-        <div class="herb-sheet">
-          <div class="herb-sheet-head">
-            <span class="herb-sheet-num">Worksheet No. 4</span>
-            <div class="herb-sheet-title">Stomach</div>
-          </div>
-          <div class="herb-sheet-body">
-            <span class="herb-sheet-label">Actives</span>
-            <div class="herb-sheet-actives">Cabbage (juice), Licorice, Honey, Garlic, Turmeric, Mastic, Chili Peppers, Slippery Elm, Peppermint, Aloe Vera, Calendula</div>
-            <div class="herb-sheet-more">+ 37 more on the full sheet</div>
-            <div class="herb-sheet-notes"></div>
-          </div>
+        <div class="herbals-grid">
+          <div class="herb-box" onclick="openHerb('PCOS / Hormones', 'worksheets/PCOS_Yoni_Hormones_Worksheet.pdf')">PCOS<span>Worksheet No. 2</span></div>
+          <div class="herb-box" onclick="openHerb('Lung Health', 'worksheets/Herb_Worksheets_Set.pdf')">Lungs<span>Worksheet No. 1</span></div>
+          <div class="herb-box" onclick="openHerb('Liver Function', 'worksheets/Herb_Worksheets_Set.pdf')">Liver<span>Worksheet No. 6</span></div>
+          <div class="herb-box" onclick="openHerb('Stomach', 'worksheets/Stomach_Worksheet.pdf')">Stomach<span>Worksheet No. 4</span></div>
+          <div class="herb-box" onclick="openHerb('Gut Health &amp; BP', 'worksheets/Herb_Worksheets_Set.pdf')">Gut &amp; BP<span>Worksheet No. 3</span></div>
+          <div class="herb-box" onclick="openHerb('Hair Growth', 'worksheets/Herb_Worksheets_Set.pdf')">Hair<span>Worksheet No. 5</span></div>
         </div>
       </div>
-      <div class="herb-collage">
-        <span class="herb-chip">Lung Health</span>
-        <span class="herb-chip">Gut Health &amp; BP</span>
-        <span class="herb-chip">Hair Growth</span>
-        <span class="herb-chip">Liver Function</span>
-      </div>
-      <p class="chart-caption">One worksheet per category — a way to work through the overwhelm of too many study options, one at a time instead of all at once.</p>
     </div>
+
+    <div class="herb-modal" id="herbModal">
+      <div class="herb-modal-card">
+        <div class="herb-modal-head">
+          <span id="herbModalTitle">Worksheet</span>
+          <button class="herb-modal-close" onclick="closeHerb()">✕</button>
+        </div>
+        <div class="herb-modal-body">
+          <iframe id="herbModalFrame" src=""></iframe>
+        </div>
+        <a class="herb-modal-save" id="herbModalSave" href="#" download>Save PDF</a>
+      </div>
+    </div>
+
+    <script>
+      function openHerb(title, src){
+        document.getElementById('herbModalTitle').textContent = title;
+        document.getElementById('herbModalFrame').src = src;
+        document.getElementById('herbModalSave').href = src;
+        document.getElementById('herbModal').classList.add('open');
+      }
+      function closeHerb(){
+        document.getElementById('herbModal').classList.remove('open');
+        document.getElementById('herbModalFrame').src = '';
+      }
+    </script>
 
     <div class="build-card">
       <span class="build-meta">React component · Personal finance tool</span>
@@ -807,28 +947,128 @@
     })();
   </script>
 
-  <footer>
-      <div class="collage-note"><p>The artistry lives in the everyday — this is the eye behind the paintings and collages.</p></div>
-      <div class="c-lg"><img src="images/img01.jpg" alt=""></div>
-      <div class="c-sm"><img src="images/img02.jpg" alt=""></div>
-      <div class="c-tall"><img src="images/img03.jpg" alt=""></div>
-      <div class="c-wide"><img src="images/img04.jpg" alt=""></div>
-      <div class="c-sm"><img src="images/img05.jpg" alt=""></div>
-      <div class="c-sm"><img src="images/img06.jpg" alt=""></div>
-      <div class="c-tall"><img src="images/img07.jpg" alt=""></div>
-      <div class="c-sm"><img src="images/img08.jpg" alt=""></div>
-      <div class="c-wide"><img src="images/img09.jpg" alt=""></div>
-      <div class="c-sm"><img src="images/img10.jpg" alt=""></div>
-      <div class="c-lg"><img src="images/img11.jpg" alt=""></div>
-      <div class="c-sm"><img src="images/img12.jpg" alt=""></div>
-      <div class="c-sm"><img src="images/img13.jpg" alt=""></div>
-      <div class="c-tall"><img src="images/img14.jpg" alt=""></div>
-      <div class="c-wide"><img src="images/img15.jpg" alt=""></div>
-      <div class="c-sm"><img src="images/img16.jpg" alt=""></div>
-      <div class="c-sm"><img src="images/img17.jpg" alt=""></div>
-      <div class="c-tall"><img src="images/img18.jpg" alt=""></div>
-      <div class="c-sm"><img src="images/img19.jpg" alt=""></div>
-      <div class="c-wide"><img src="images/img20.jpg" alt=""></div>
+  <div class="checker-strip"></div>
+
+  <section id="gallery">
+    <div class="section-head">
+      <span class="eyebrow">02</span>
+      <h2 class="outline-text">Photography</h2>
+    </div>
+    <p class="gallery-intro">A running collection straight from my camera roll — swipe through, like flipping a scrapbook page.</p>
+    <div class="scrapbook-frame">
+      <div class="photo-window">
+        <img src="images/img01.jpg" alt="">
+        <img src="images/img02.jpg" alt="">
+        <img src="images/img03.jpg" alt="">
+        <img src="images/img04.jpg" alt="">
+        <img src="images/img05.jpg" alt="">
+        <img src="images/img06.jpg" alt="">
+        <img src="images/img07.jpg" alt="">
+        <img src="images/img08.jpg" alt="">
+        <img src="images/img09.jpg" alt="">
+        <img src="images/img10.jpg" alt="">
+        <img src="images/img11.jpg" alt="">
+        <img src="images/img12.jpg" alt="">
+        <img src="images/img13.jpg" alt="">
+        <img src="images/img14.jpg" alt="">
+        <img src="images/img15.jpg" alt="">
+        <img src="images/img16.jpg" alt="">
+        <img src="images/img17.jpg" alt="">
+        <img src="images/img18.jpg" alt="">
+        <img src="images/img19.jpg" alt="">
+        <img src="images/img20.jpg" alt="">
+      </div>
+      <div class="scrapbook-caption">← swipe through →</div>
+    </div>
+  </section>
+
+  <div class="checker-strip alt"></div>
+
+  <section id="music">
+    <div class="section-head">
+      <span class="eyebrow">03</span>
+      <h2 class="outline-text">Music</h2>
+    </div>
+    <p class="gallery-intro">Press play — runs off an old boombox, one track at a time.</p>
+
+    <div class="boombox">
+      <div class="boombox-handle"></div>
+      <div class="boombox-unit" data-track="0">
+        <div class="boombox-speaker"></div>
+        <div class="boombox-screen">
+          <div class="boombox-track-name">Fear of Abandonment</div>
+          <div class="boombox-clock">0:00 / 0:00</div>
+        </div>
+        <button class="boombox-play" aria-label="Play">▶</button>
+        <audio src="audio/track1.mp3"></audio>
+      </div>
+      <div class="boombox-unit" data-track="1">
+        <div class="boombox-speaker"></div>
+        <div class="boombox-screen">
+          <div class="boombox-track-name">Just Like Life</div>
+          <div class="boombox-clock">0:00 / 0:00</div>
+        </div>
+        <button class="boombox-play" aria-label="Play">▶</button>
+        <audio src="audio/track2.mp3"></audio>
+      </div>
+      <div class="boombox-unit" data-track="2">
+        <div class="boombox-speaker"></div>
+        <div class="boombox-screen">
+          <div class="boombox-track-name">Linger</div>
+          <div class="boombox-clock">0:00 / 0:00</div>
+        </div>
+        <button class="boombox-play" aria-label="Play">▶</button>
+        <audio src="audio/track3.mp3"></audio>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    (function(){
+      function fmt(s){
+        if(!isFinite(s)) return '0:00';
+        const m = Math.floor(s/60), sec = Math.floor(s%60);
+        return m + ':' + String(sec).padStart(2,'0');
+      }
+      document.querySelectorAll('.boombox-unit').forEach(unit => {
+        const audio = unit.querySelector('audio');
+        const btn = unit.querySelector('.boombox-play');
+        const clock = unit.querySelector('.boombox-clock');
+
+        audio.addEventListener('loadedmetadata', () => {
+          clock.textContent = fmt(audio.currentTime) + ' / ' + fmt(audio.duration);
+        });
+        audio.addEventListener('timeupdate', () => {
+          clock.textContent = fmt(audio.currentTime) + ' / ' + fmt(audio.duration);
+        });
+        audio.addEventListener('ended', () => { btn.textContent = '▶'; });
+
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.boombox-unit audio').forEach(a => {
+            if(a !== audio){ a.pause(); }
+          });
+          document.querySelectorAll('.boombox-play').forEach(b => {
+            if(b !== btn) b.textContent = '▶';
+          });
+          if(audio.paused){ audio.play(); btn.textContent = '❚❚'; }
+          else { audio.pause(); btn.textContent = '▶'; }
+        });
+      });
+    })();
+  </script>
+
+  <div class="checker-strip"></div>
+
+  <section id="video">
+    <div class="section-head">
+      <span class="eyebrow">04</span>
+      <h2 class="outline-text">Video</h2>
+    </div>
+    <p class="gallery-intro">Dance clips and anything else in motion — space reserved, send them over whenever.</p>
+    <div class="herb-sheets">
+      <div class="herb-sheet-slot"><strong>Video 1</strong><span>clip coming</span></div>
+      <div class="herb-sheet-slot"><strong>Video 2</strong><span>clip coming</span></div>
+      <div class="herb-sheet-slot"><strong>Video 3</strong><span>clip coming</span></div>
     </div>
   </section>
 
