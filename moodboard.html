@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Style Reference</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@400;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #2B1E33; font-family: 'Inter', sans-serif; padding: 32px 20px 60px; color: #F4EFE6; }
+  .wrap { max-width: 720px; margin: 0 auto; }
+  h1 { font-family: 'Zilla Slab', serif; font-weight: 700; font-size: 32px; color: #F4EFE6; }
+  .sub { font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: #C9A227; margin-bottom: 8px; }
+  .desc { color: #C9BEDA; font-size: 14px; margin-top: 10px; max-width: 520px; line-height: 1.5; }
+  h2 { font-family: 'Zilla Slab', serif; font-size: 20px; margin: 40px 0 16px; color: #F4EFE6; border-bottom: 1px solid #4A3B54; padding-bottom: 8px; }
+  .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 12px; }
+  .swatch { border-radius: 12px; overflow: hidden; box-shadow: 0 4px 14px rgba(0,0,0,0.3); }
+  .fill { height: 80px; }
+  .label { background: #3A2C42; padding: 8px 10px; }
+  .name { font-size: 13px; font-weight: 600; }
+  .hex { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #B7A9C4; }
+  .pattern-list { display: flex; flex-direction: column; gap: 10px; }
+  .pattern-item { background: #3A2C42; border-radius: 10px; padding: 14px 16px; font-size: 14px; line-height: 1.5; }
+  .pattern-item b { color: #C9A227; }
+  .type-row { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 10px; }
+  .type-sample { background: #3A2C42; border-radius: 10px; padding: 16px 20px; flex: 1; min-width: 200px; }
+  .type-sample .tag { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #C9A227; text-transform: uppercase; letter-spacing: 1px; }
+  .display-sample { font-family: 'Zilla Slab', serif; font-weight: 700; font-size: 26px; margin-top: 6px; }
+  .body-sample { font-family: 'Inter', sans-serif; font-size: 15px; margin-top: 6px; }
+  .mono-sample { font-family: 'IBM Plex Mono', monospace; font-size: 15px; margin-top: 6px; }
+  footer { margin-top: 48px; font-size: 12px; color: #8B7E99; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="sub">Living style reference</div>
+  <h1>Eclectic Vintage Jewel Tones</h1>
+  <p class="desc">Pulled from the nail art, mid-century furniture, and vintage finds you've shared. This is the base palette and pattern language I'll carry into charts, forms, and the money tracker — send more images anytime and I'll fold them in.</p>
+
+  <h2>Core palette</h2>
+  <div class="swatches">
+    <div class="swatch"><div class="fill" style="background:#4A1E3D"></div><div class="label"><div class="name">Eggplant</div><div class="hex">#4A1E3D</div></div></div>
+    <div class="swatch"><div class="fill" style="background:#A8B84A"></div><div class="label"><div class="name">Sage Bloom</div><div class="hex">#A8B84A</div></div></div>
+    <div class="swatch"><div class="fill" style="background:#C9D68A"></div><div class="label"><div class="name">Lily Petal</div><div class="hex">#C9D68A</div></div></div>
+    <div class="swatch"><div class="fill" style="background:#C9A227"></div><div class="label"><div class="name">Brass Gold</div><div class="hex">#C9A227</div></div></div>
+    <div class="swatch"><div class="fill" style="background:#C4642F"></div><div class="label"><div class="name">Burnt Clay</div><div class="hex">#C4642F</div></div></div>
+    <div class="swatch"><div class="fill" style="background:#D6408A"></div><div class="label"><div class="name">Hot Pink Pop</div><div class="hex">#D6408A</div></div></div>
+    <div class="swatch"><div class="fill" style="background:#1F3A2E"></div><div class="label"><div class="name">Pine Green</div><div class="hex">#1F3A2E</div></div></div>
+    <div class="swatch"><div class="fill" style="background:#F4EFE6"></div><div class="label" style="color:#2B1E33"><div class="name" style="color:#2B1E33">Bone</div><div class="hex" style="color:#6b6b6b">#F4EFE6</div></div></div>
+    <div class="swatch"><div class="fill" style="background:#1B2A4A"></div><div class="label"><div class="name">Navy</div><div class="hex">#1B2A4A</div></div></div>
+    <div class="swatch"><div class="fill" style="background:linear-gradient(135deg,#C7CDD6,#8A9199,#C7CDD6)"></div><div class="label"><div class="name">Silver Metal</div><div class="hex">#B7BEC7</div></div></div>
+    <div class="swatch"><div class="fill" style="background:#8A5A34"></div><div class="label"><div class="name">Warm Wood</div><div class="hex">#8A5A34</div></div></div>
+  </div>
+
+  <h2>Patterns & motifs</h2>
+  <div class="pattern-list">
+    <div class="pattern-item"><b>Stripes &amp; polka dots as core patterns</b> — bold graphic stripes and dot fields (not just floral accents) show up constantly — strong candidates for chart series, dividers, and backgrounds.</div>
+    <div class="pattern-item"><b>Gingham &amp; checkerboard tile</b> — patchwork/checker floor tiles in mixed colors — great model for grid layouts, table striping, or calendar/tracker cells.</div>
+    <div class="pattern-item"><b>Engraved silver metal</b> — armor-inspired ornate metallic surfaces (etched, riveted, polished) — good for icon treatments, borders, or a metallic accent finish alongside the gold.</div>
+    <div class="pattern-item"><b>Mixed-era furniture silhouettes</b> — turned wood legs, scalloped table edges, layered shelving — good inspiration for card shapes, dividers, or corner treatments.</div>
+    <div class="pattern-item"><b>Color-blocked contrast</b> — one bold saturated color against a warm neutral or contrasting wall — good model for primary/background pairing in UI.</div>
+    <div class="pattern-item"><b>Worn-in, handmade texture</b> — vintage leather, hand-painted signs, stitched details — leans toward texture and imperfection over flat, corporate polish.</div>
+    <div class="pattern-item"><b>Mesh, don't match</b> — your own words: deliberately combining colors/patterns/textures rather than keeping things uniform — this is the core design principle, not just a palette.</div>
+  </div>
+
+  <h2>Type pairing</h2>
+  <div class="type-row">
+    <div class="type-sample"><div class="tag">Display</div><div class="display-sample">Zilla Slab</div></div>
+    <div class="type-sample"><div class="tag">Body</div><div class="body-sample">Inter — clean, readable, quiet</div></div>
+    <div class="type-sample"><div class="tag">Data / Numbers</div><div class="mono-sample">IBM Plex Mono 123.45</div></div>
+  </div>
+
+  <footer>Used in: Cash Ledger tracker. Next up: forms, charts.</footer>
+</div>
+</body>
+</html>
