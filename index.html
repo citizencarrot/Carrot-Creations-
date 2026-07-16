@@ -106,12 +106,30 @@
     letter-spacing:-0.01em;
   }
   .hero .tagline{
+    position:relative;
     font-size:clamp(1.05rem, 2vw, 1.3rem);
     max-width:640px;
-    margin-top:1.4rem;
+    margin-top:1.8rem;
     color:var(--eggplant);
     font-weight:400;
+    padding:1.3rem 1.5rem;
+    border-left:2px dashed var(--eggplant);
+    border-right:2px dashed var(--eggplant);
   }
+  .hero .tagline::before,
+  .hero .tagline::after{
+    content:"";
+    position:absolute;
+    left:0;
+    right:0;
+    height:11px;
+    background-image:radial-gradient(circle at 5.5px 5.5px, var(--eggplant) 5.2px, transparent 5.4px);
+    background-size:11px 11px;
+    background-repeat:repeat-x;
+    background-position:center;
+  }
+  .hero .tagline::before{ top:-5.5px; }
+  .hero .tagline::after{ bottom:-5.5px; }
   .hero-tags{
     display:flex;
     flex-wrap:wrap;
