@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Moodboard</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@600;700&family=Caveat:wght@500;700&family=IBM+Plex+Mono:wght@500&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background:
+      radial-gradient(circle at 20% 10%, rgba(255,255,255,0.03), transparent 40%),
+      radial-gradient(circle at 80% 90%, rgba(255,255,255,0.03), transparent 40%),
+      #201526;
+    font-family: 'IBM Plex Mono', monospace;
+    padding: 16px 10px 60px;
+  }
+  .board { max-width: 950px; margin: 0 auto; column-count: 2; column-gap: 8px; position: relative; }
+  @media (min-width: 640px) { .board { column-count: 3; } }
+  @media (min-width: 900px) { .board { column-count: 4; } }
+  .piece { break-inside: avoid; margin-bottom: 8px; position: relative; }
+  .tight { margin-top: -20px; } .tight2 { margin-top: -30px; }
+
+  /* sticker outline hack: hugs the shape's own alpha silhouette, not a bounding box */
+  .stk {
+    filter:
+      drop-shadow(1.5px 0 0 var(--oc,#F4EFE6)) drop-shadow(-1.5px 0 0 var(--oc,#F4EFE6))
+      drop-shadow(0 1.5px 0 var(--oc,#F4EFE6)) drop-shadow(0 -1.5px 0 var(--oc,#F4EFE6))
+      drop-shadow(1.2px 1.2px 0 var(--oc,#F4EFE6)) drop-shadow(-1.2px -1.2px 0 var(--oc,#F4EFE6))
+      drop-shadow(0 6px 10px rgba(0,0,0,0.5));
+  }
+  .stk svg { width: 100%; height: 100%; display:block; }
+
+  /* rectangular fabric/texture stickers: colored outline instead of white card */
+  .rect-stk { border-radius: 6px; box-shadow: 0 0 0 3px var(--oc,#F4EFE6), 0 6px 14px rgba(0,0,0,0.5); }
+  .h50{height:50px;} .h60 { height: 60px; } .h80 { height: 80px; } .h100 { height: 100px; } .h130 { height: 130px; } .h150 { height: 150px; } .h170{height:170px;}
+
+  .split2, .split3 { display:flex; border-radius: 6px; overflow:hidden; box-shadow: 0 0 0 3px var(--oc,#F4EFE6), 0 6px 14px rgba(0,0,0,0.5); }
+  .split2 > div, .split3 > div { flex:1; }
+
+  .title-card {
+    background: #F4EFE6; border-radius: 4px; padding: 14px 12px 16px;
+    transform: rotate(-2deg); box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+  }
+  .title-card h1 { font-family: 'Zilla Slab', serif; font-size: 19px; color: #4A1E3D; line-height: 1.15; }
+  .title-card .rule { font-family: 'Caveat', cursive; font-size: 15px; color: #C4642F; margin-top: 4px; }
+
+  .r1 { transform: rotate(-3deg); } .r2 { transform: rotate(2deg); } .r3 { transform: rotate(-1.5deg); }
+  .r4 { transform: rotate(3deg); } .r5 { transform: rotate(-2.5deg); } .r6 { transform: rotate(1.5deg); }
+  .r7 { transform: rotate(4deg); } .r8 { transform: rotate(-4deg); } .r9{transform:rotate(-6deg);} .r10{transform:rotate(6deg);}
+
+  .word-tape {
+    display:inline-block; background: #F4EFE6; color:#2B1E33; font-family:'Caveat',cursive; font-size:17px;
+    padding: 6px 11px; border-radius: 3px; box-shadow: 0 6px 14px rgba(0,0,0,0.4);
+  }
+  .marquee {
+    display:inline-block; padding:8px 14px; border-radius: 20px; font-family:'IBM Plex Mono',monospace; font-size:12px;
+    letter-spacing:1px; color:#201526; font-weight:600;
+    background: linear-gradient(90deg,#D6408A,#C9A227,#4FA8A0,#D6408A);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.5);
+  }
+  .btn3d { border-radius: 50%; box-shadow: inset 0 3px 6px rgba(255,255,255,0.55), inset 0 -4px 8px rgba(0,0,0,0.35), 0 6px 12px rgba(0,0,0,0.45); }
+  .holo { border-radius: 6px; box-shadow: 0 0 0 3px #F4EFE6, 0 6px 14px rgba(0,0,0,0.5); background: linear-gradient(120deg,#8E1B3F,#C9A227,#1E6B52,#1B3F73,#D6408A); background-size:220% 220%; }
+
+  .float { position: absolute; z-index: 20; pointer-events:none; }
+  .pixel-corner { position:absolute; width:14px; height:14px; }
+</style>
+</head>
+<body>
+<div class="board">
+
+  <!-- floating screen-blend overlays scattered across the whole board -->
+  <div class="float overlay-screen" style="top:5%; left:40%; width:44px; opacity:0.9; mix-blend-mode:screen;">
+    <svg viewBox="0 0 100 100"><path d="M50 5 L61 38 L96 38 L67 58 L78 92 L50 71 L22 92 L33 58 L4 38 L39 38 Z" fill="#F2E28A"/></svg>
+  </div>
+  <div class="float" style="top:23%; left:6%; width:30px; opacity:0.85; mix-blend-mode:screen; transform: rotate(12deg);">
+    <svg viewBox="0 0 100 100"><path d="M50 20 C55 30 65 32 65 42 C65 55 50 62 50 62 C50 62 35 55 35 42 C35 32 45 30 50 20 Z" fill="#D6408A"/></svg>
+  </div>
+  <div class="float" style="top:49%; left:72%; width:40px; opacity:0.9; mix-blend-mode:screen; transform: rotate(-15deg);">
+    <svg viewBox="0 0 100 100"><path d="M50 5 L61 38 L96 38 L67 58 L78 92 L50 71 L22 92 L33 58 L4 38 L39 38 Z" fill="#BFE0E8"/></svg>
+  </div>
+  <div class="float" style="top:66%; left:12%; width:26px; opacity:0.85; mix-blend-mode:screen;">
+    <svg viewBox="0 0 100 100"><path d="M50 20 C55 30 65 32 65 42 C65 55 50 62 50 62 C50 62 35 55 35 42 C35 32 45 30 50 20 Z" fill="#C9A227"/></svg>
+  </div>
+  <div class="float" style="top:80%; left:58%; width:36px; opacity:0.85; mix-blend-mode:screen; transform: rotate(8deg);">
+    <svg viewBox="0 0 100 100"><path d="M50 5 L61 38 L96 38 L67 58 L78 92 L50 71 L22 92 L33 58 L4 38 L39 38 Z" fill="#D4E157"/></svg>
+  </div>
+  <div class="float" style="top:37%; left:90%; width:26px; opacity:0.9; mix-blend-mode:screen;">
+    <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="none" stroke="#F5C7D6" stroke-width="10"/></svg>
+  </div>
+  <div class="float" style="top:12%; left:70%; width:22px; opacity:0.9; mix-blend-mode:screen;">
+    <svg viewBox="0 0 100 100"><path d="M50 5 L61 38 L96 38 L67 58 L78 92 L50 71 L22 92 L33 58 L4 38 L39 38 Z" fill="#7ED4CB"/></svg>
+  </div>
+  <div class="float" style="top:90%; left:22%; width:24px; opacity:0.85; mix-blend-mode:screen;">
+    <svg viewBox="0 0 100 100"><path d="M50 20 C55 30 65 32 65 42 C65 55 50 62 50 62 C50 62 35 55 35 42 C35 32 45 30 50 20 Z" fill="#F5C7D6"/></svg>
+  </div>
+
+  <div class="piece title-card r1">
+    <h1>mood board</h1>
+    <div class="rule">mesh, don't match</div>
+  </div>
+
+  <div class="piece stk r4" style="--oc:#F4EFE6; height:100px;">
+    <svg viewBox="0 0 100 100"><path d="M50 8 L82 20 V48 C82 70 68 84 50 92 C32 84 18 70 18 48 V20 Z" fill="#4A1E3D" stroke="#C9A227" stroke-width="4"/><path d="M50 30 L58 46 H42 Z" fill="#C9A227"/></svg>
+  </div>
+
+  <!-- gothic rose window -->
+  <div class="piece stk r2" style="--oc:#F4EFE6; height:120px;">
+    <svg viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="42" fill="#1A1A1E" stroke="#F4EFE6" stroke-width="3"/>
+      <g stroke="#1A1A1E" stroke-width="2">
+        <path d="M50 50 L50 8" /><path d="M50 50 L83 30" /><path d="M50 50 L83 70" />
+        <path d="M50 50 L50 92" /><path d="M50 50 L17 70" /><path d="M50 50 L17 30" />
+      </g>
+      <path d="M50 8 A42 42 0 0 1 83 30 L50 50 Z" fill="#8E1B3F"/>
+      <path d="M83 30 A42 42 0 0 1 83 70 L50 50 Z" fill="#1B3F73"/>
+      <path d="M83 70 A42 42 0 0 1 50 92 L50 50 Z" fill="#1E6B52"/>
+      <path d="M50 92 A42 42 0 0 1 17 70 L50 50 Z" fill="#D68A2E"/>
+      <path d="M17 70 A42 42 0 0 1 17 30 L50 50 Z" fill="#8E1B3F"/>
+      <path d="M17 30 A42 42 0 0 1 50 8 L50 50 Z" fill="#1B3F73"/>
+      <circle cx="50" cy="50" r="10" fill="#C9A227"/>
+    </svg>
+  </div>
+
+  <!-- clothing shapes, stickered -->
+  <div class="piece stk r2" style="--oc:#F4EFE6; height:130px;">
+    <svg viewBox="0 0 100 120"><path d="M35 10 L50 2 L65 10 L60 30 L70 115 H30 L40 30 Z" fill="#D6408A" stroke="#F4EFE6" stroke-width="3"/><path d="M35 10 L20 25 L28 34 L40 22 Z" fill="#D6408A" stroke="#F4EFE6" stroke-width="3"/><path d="M65 10 L80 25 L72 34 L60 22 Z" fill="#D6408A" stroke="#F4EFE6" stroke-width="3"/></svg>
+  </div>
+  <div class="piece stk r6" style="--oc:#C9A227; height:140px;">
+    <svg viewBox="0 0 100 120"><path d="M30 20 L50 8 L70 20 L66 60 L80 116 H20 L34 60 Z" fill="#4A1E3D" stroke="#C9A227" stroke-width="3"/><circle cx="50" cy="18" r="5" fill="#C9A227"/></svg>
+  </div>
+  <div class="piece stk r5" style="--oc:#F4EFE6; height:100px;">
+    <svg viewBox="0 0 100 120"><path d="M22 20 H78 L70 100 H30 Z" fill="#B5652E" stroke="#F4EFE6" stroke-width="3"/><rect x="22" y="14" width="56" height="10" rx="4" fill="#7A4426" stroke="#F4EFE6" stroke-width="2"/></svg>
+  </div>
+  <div class="piece stk r7" style="--oc:#F4EFE6; height:120px;">
+    <svg viewBox="0 0 100 120"><path d="M20 90 C20 70 30 55 50 55 C70 55 80 70 80 90 L86 100 L70 108 L50 100 L30 108 L14 100 Z" fill="#2A4A6B" stroke="#F4EFE6" stroke-width="3"/><rect x="42" y="20" width="16" height="40" rx="6" fill="#2A4A6B" stroke="#F4EFE6" stroke-width="2"/></svg>
+  </div>
+  <div class="piece stk r1" style="--oc:#F4EFE6; height:90px;">
+    <svg viewBox="0 0 100 120"><path d="M15 70 Q50 40 85 70 L80 78 Q50 55 20 78 Z" fill="#6B1F2E" stroke="#F4EFE6" stroke-width="3"/><path d="M25 78 L18 100 L34 96 Z" fill="#6B1F2E" stroke="#F4EFE6" stroke-width="2"/><path d="M75 78 L82 100 L66 96 Z" fill="#6B1F2E" stroke="#F4EFE6" stroke-width="2"/></svg>
+  </div>
+
+  <!-- jeweled cross -->
+  <div class="piece stk r3" style="--oc:#F4EFE6; height:130px;">
+    <svg viewBox="0 0 100 120"><rect x="42" y="10" width="16" height="90" rx="4" fill="#C9A227" stroke="#F4EFE6" stroke-width="3"/><rect x="18" y="35" width="64" height="16" rx="4" fill="#C9A227" stroke="#F4EFE6" stroke-width="3"/><path d="M50 20 L57 33 L43 33 Z" fill="#8E1B3F"/><path d="M50 55 L58 68 L42 68 Z" fill="#1B3F73"/></svg>
+  </div>
+
+  <div class="piece rect-stk r5 tight" style="--oc:#8A5A34;">
+    <div style="display:flex;">
+      <div class="h100" style="background:#C43D1F; flex:1;"></div>
+      <div class="h100" style="background:#2A4A6B; flex:1;"></div>
+    </div>
+  </div>
+
+  <!-- wooden chest with brass studs -->
+  <div class="piece stk r4" style="--oc:#F4EFE6; height:130px;">
+    <svg viewBox="0 0 120 100">
+      <path d="M10 45 Q60 20 110 45 L110 90 L10 90 Z" fill="#6E4526" stroke="#F4EFE6" stroke-width="3"/>
+      <rect x="10" y="45" width="100" height="10" fill="#4A3324"/>
+      <circle cx="20" cy="50" r="3" fill="#C9A227"/><circle cx="40" cy="47" r="3" fill="#C9A227"/><circle cx="60" cy="45" r="3" fill="#C9A227"/><circle cx="80" cy="47" r="3" fill="#C9A227"/><circle cx="100" cy="50" r="3" fill="#C9A227"/>
+      <rect x="55" y="55" width="10" height="14" rx="2" fill="#C9A227"/>
+    </svg>
+  </div>
+
+  <!-- webcam / early-internet photo grid -->
+  <div class="piece rect-stk r6" style="--oc:#F4EFE6;">
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:2px; height:130px;">
+      <div style="background:#8E1B3F"></div><div style="background:#F5C7D6"></div><div style="background:#1E6B52"></div>
+      <div style="background:#F2E28A"></div><div style="background:#4A1E3D; display:flex;align-items:center;justify-content:center; color:#F4EFE6; font-family:'IBM Plex Mono'; font-size:10px;">hi</div><div style="background:#D6408A"></div>
+      <div style="background:#BFE0E8"></div><div style="background:#C9A227"></div><div style="background:#1B2A4A"></div>
+    </div>
+  </div>
+
+  <div class="piece stk r3" style="--oc:#B7BEC7; height:100px;">
+    <svg viewBox="0 0 100 100"><path d="M50 6 C40 20 40 30 40 30 L38 32 C25 32 20 45 20 45 L30 48 L30 62 L20 66 C20 66 25 80 38 80 L40 82 L40 90 H60 L60 82 L62 80 C75 80 80 66 80 66 L70 62 L70 48 L80 45 C80 45 75 32 62 32 L60 30 C60 30 60 20 50 6 Z" fill="none" stroke="#B7BEC7" stroke-width="4"/></svg>
+  </div>
+
+  <div class="piece split3 r4 tight" style="--oc:#8A5A34;">
+    <div class="h80" style="background:#B5652E"></div>
+    <div class="h80" style="background:#4FA8A0"></div>
+    <div class="h80" style="background:#D9761F"></div>
+  </div>
+
+  <!-- glossy Y2K button -->
+  <div class="piece r2" style="display:flex; justify-content:center;">
+    <div class="btn3d" style="width:80px; height:80px; background:radial-gradient(circle at 35% 30%, #E8C542, #C9A227 70%);"></div>
+  </div>
+
+  <div class="marquee piece r1">y2k ✦ web ✦ core</div>
+
+  <!-- jewel gem stickers -->
+  <div class="piece stk r5" style="--oc:#F4EFE6; height:80px;">
+    <svg viewBox="0 0 100 100"><path d="M20 40 L50 10 L80 40 L65 80 H35 Z" fill="#8E1B3F" stroke="#F4EFE6" stroke-width="3"/><path d="M20 40 H80 M35 80 L50 40 L65 80" stroke="#1A1A1E" stroke-width="1.5"/></svg>
+  </div>
+  <div class="piece stk r8" style="--oc:#F4EFE6; height:70px;">
+    <svg viewBox="0 0 100 100"><path d="M20 40 L50 10 L80 40 L65 80 H35 Z" fill="#1E6B52" stroke="#F4EFE6" stroke-width="3"/><path d="M20 40 H80 M35 80 L50 40 L65 80" stroke="#1A1A1E" stroke-width="1.5"/></svg>
+  </div>
+  <div class="piece stk r6" style="--oc:#F4EFE6; height:70px;">
+    <svg viewBox="0 0 100 100"><path d="M20 40 L50 10 L80 40 L65 80 H35 Z" fill="#D68A2E" stroke="#F4EFE6" stroke-width="3"/><path d="M20 40 H80 M35 80 L50 40 L65 80" stroke="#1A1A1E" stroke-width="1.5"/></svg>
+  </div>
+
+  <div class="piece rect-stk r3" style="--oc:#B5652E;">
+    <div style="background:repeating-linear-gradient(90deg,#B5652E 0 16px,#7A4426 16px 18px),repeating-linear-gradient(0deg,#B5652E 0 16px,#7A4426 16px 18px); height:100px;"></div>
+  </div>
+
+  <!-- gothic arch window -->
+  <div class="piece stk r2" style="--oc:#F4EFE6; height:130px;">
+    <svg viewBox="0 0 80 120"><path d="M10 118 V50 C10 20 25 5 40 5 C55 5 70 20 70 50 V118 Z" fill="none" stroke="#F4EFE6" stroke-width="4"/><path d="M40 5 V118 M10 70 H70" stroke="#F4EFE6" stroke-width="2"/></svg>
+  </div>
+
+  <!-- hula-hoop concentric rings -->
+  <div class="piece r6" style="display:flex; justify-content:center; padding: 6px 0;">
+    <svg viewBox="0 0 120 120" width="100" height="100">
+      <circle cx="60" cy="60" r="50" fill="none" stroke="#D6408A" stroke-width="6"/>
+      <circle cx="60" cy="60" r="38" fill="none" stroke="#4FA8A0" stroke-width="6"/>
+      <circle cx="60" cy="60" r="26" fill="none" stroke="#F2E28A" stroke-width="6"/>
+    </svg>
+  </div>
+
+  <div class="piece split3 r1 tight" style="--oc:#8A5A34;">
+    <div class="h60" style="background:#A8B84A"></div>
+    <div class="h60" style="background:#C9D68A"></div>
+    <div class="h60" style="background:#D6C7E8"></div>
+  </div>
+
+  <div class="piece stk r1" style="--oc:#F4EFE6; height:90px;">
+    <svg viewBox="0 0 100 100"><circle cx="34" cy="60" r="5" fill="#C4642F"/><circle cx="66" cy="60" r="5" fill="#C4642F"/><circle cx="50" cy="42" r="5" fill="#C4642F"/><path d="M20 60 C20 40 33 28 50 28 C67 28 80 40 80 60 C80 78 66 84 50 84 C34 84 20 78 20 60 Z" fill="#8E1B3F" stroke="#F4EFE6" stroke-width="3"/><line x1="50" y1="28" x2="50" y2="84" stroke="#1A1A1E" stroke-width="2"/></svg>
+  </div>
+
+  <!-- flower power flower -->
+  <div class="piece r7" style="display:flex; justify-content:center;">
+    <svg viewBox="0 0 100 100" width="80" height="80">
+      <g fill="#D9A441"><ellipse cx="50" cy="20" rx="14" ry="20"/><ellipse cx="50" cy="80" rx="14" ry="20"/><ellipse cx="20" cy="50" rx="20" ry="14"/><ellipse cx="80" cy="50" rx="20" ry="14"/></g>
+      <circle cx="50" cy="50" r="16" fill="#4A1E3D"/>
+    </svg>
+  </div>
+
+  <div class="piece rect-stk r2" style="--oc:#8B6A3D;">
+    <div style="background:repeating-linear-gradient(45deg,#D9C9A8 0 9px,#8B6A3D 9px 11px),repeating-linear-gradient(-45deg,#D9C9A8 0 9px,#8B6A3D 9px 11px); height:80px;"></div>
+  </div>
+
+  <div class="piece split2 r4 tight" style="--oc:#4A4A52;">
+    <div class="h100" style="background:#4A4A52"></div>
+    <div class="h100" style="background:linear-gradient(135deg,#D6DBDF,#9AA2A8)"></div>
+  </div>
+
+  <div class="piece stk r6" style="--oc:#F4EFE6; height:100px;">
+    <svg viewBox="0 0 100 120"><path d="M30 30 Q50 15 70 30 L74 50 Q50 40 26 50 Z" fill="#D4E157" stroke="#F4EFE6" stroke-width="3"/><rect x="40" y="15" width="20" height="14" rx="7" fill="#D4E157" stroke="#F4EFE6" stroke-width="2"/></svg>
+  </div>
+
+  <div class="piece stk r6" style="--oc:#B7BEC7; height:120px;">
+    <svg viewBox="0 0 100 100"><path d="M50 15 C38 32 22 30 22 30 C22 55 35 78 50 88 C65 78 78 55 78 30 C78 30 62 32 50 15 Z" fill="none" stroke="#B7BEC7" stroke-width="4"/><path d="M50 34 V70 M35 50 H65" stroke="#B7BEC7" stroke-width="3"/></svg>
+  </div>
+
+  <div class="piece rect-stk r3" style="--oc:#8B8570;">
+    <div style="background:linear-gradient(180deg,#A8B4BE,#C9BFA8 60%,#8B8570); height:130px;"></div>
+  </div>
+
+  <div class="piece split3 r5 tight" style="--oc:#C9A227;">
+    <div class="h60" style="background:#4A1E3D"></div>
+    <div class="h60" style="background:#D6408A"></div>
+    <div class="h60" style="background:#C9A227"></div>
+  </div>
+
+  <!-- pop-art halftone -->
+  <div class="piece rect-stk r1" style="--oc:#8E1B3F;">
+    <div style="background:radial-gradient(#8E1B3F 30%, transparent 31%) 0 0/14px 14px, #F2E28A; height:100px;"></div>
+  </div>
+
+  <div class="piece stk r2" style="--oc:#F4EFE6; height:110px;">
+    <svg viewBox="0 0 100 100"><ellipse cx="50" cy="55" rx="26" ry="30" fill="#8E1B3F" stroke="#F4EFE6" stroke-width="3"/><line x1="50" y1="27" x2="50" y2="83" stroke="#1A1A1E" stroke-width="2"/><circle cx="38" cy="42" r="4" fill="#1A1A1E"/><circle cx="62" cy="42" r="4" fill="#1A1A1E"/><circle cx="50" cy="55" r="4" fill="#1A1A1E"/><circle cx="38" cy="68" r="4" fill="#1A1A1E"/><circle cx="62" cy="68" r="4" fill="#1A1A1E"/></svg>
+  </div>
+
+  <div class="piece rect-stk r1" style="--oc:#3D5637;">
+    <div style="background:radial-gradient(circle at 50% 0%,#3D5637,#2A3D28 80%); height:150px;"></div>
+  </div>
+
+  <div class="piece stk r3" style="--oc:#F4EFE6; height:120px;">
+    <svg viewBox="0 0 100 120"><path d="M40 15 L60 15 L58 40 L70 100 L30 100 L42 40 Z" fill="#5C6B3F" stroke="#F4EFE6" stroke-width="3"/><rect x="36" y="8" width="28" height="10" rx="5" fill="#5C6B3F" stroke="#F4EFE6" stroke-width="2"/></svg>
+  </div>
+
+  <div class="piece stk r4" style="--oc:#F4EFE6; height:90px;">
+    <svg viewBox="0 0 100 100"><path d="M50 8 C60 8 60 20 50 20 C40 20 40 8 50 8 Z M32 22 L68 22 L64 34 L36 34 Z" fill="#C9A227" stroke="#F4EFE6" stroke-width="2"/><rect x="40" y="34" width="20" height="10" fill="#C9A227"/></svg>
+  </div>
+
+  <div class="piece split2 r3 tight" style="--oc:#1B2A4A;">
+    <div class="h80" style="background:#1B2A4A"></div>
+    <div class="h80" style="background:#F4EFE6"></div>
+  </div>
+
+  <div class="piece word-tape r6">plaid + tile</div>
+  <div class="piece word-tape r2" style="margin-top:6px;">jewel + wood</div>
+
+  <div class="piece stk r5" style="--oc:#8F8F88; height:100px;">
+    <svg viewBox="0 0 100 100"><rect x="20" y="20" width="60" height="60" fill="none" stroke="#8F8F88" stroke-width="2"/><rect x="30" y="30" width="40" height="40" fill="none" stroke="#8F8F88" stroke-width="2"/><rect x="40" y="40" width="20" height="20" fill="none" stroke="#8F8F88" stroke-width="2"/></svg>
+  </div>
+
+  <!-- holographic Y2K foil chip -->
+  <div class="piece holo r2" style="height:90px;"></div>
+
+  <div class="piece rect-stk r2" style="--oc:#1A1A1E;">
+    <div style="background:linear-gradient(135deg,#8E1B3F 0 20%,#1A1A1E 20% 22%,#1B3F73 22% 45%,#1A1A1E 45% 47%,#D68A2E 47% 70%,#1A1A1E 70% 72%,#1E6B52 72% 100%); height:130px;"></div>
+  </div>
+
+  <div class="piece split3 r1 tight" style="--oc:#F4EFE6;">
+    <div class="h60" style="background:#8FAF8A"></div>
+    <div class="h60" style="background:#E8A7C9"></div>
+    <div class="h60" style="background:#1B2A4A"></div>
+  </div>
+
+  <div class="piece stk r3" style="--oc:#D6408A; height:70px;">
+    <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="34" fill="none" stroke="#D6408A" stroke-width="4"/><circle cx="50" cy="50" r="4" fill="#D6408A"/></svg>
+  </div>
+
+  <div class="piece r5" style="display:flex; justify-content:center;">
+    <div class="btn3d" style="width:64px; height:64px; background:radial-gradient(circle at 35% 30%, #7ED4CB, #4FA8A0 70%);"></div>
+  </div>
+
+  <div class="piece stk r8" style="--oc:#F4EFE6; height:110px;">
+    <svg viewBox="0 0 100 120"><path d="M25 25 L75 25 L68 90 L32 90 Z" fill="#F5C7D6" stroke="#F4EFE6" stroke-width="3"/><path d="M25 25 L15 40 L25 45 Z" fill="#F5C7D6" stroke="#F4EFE6" stroke-width="2"/><path d="M75 25 L85 40 L75 45 Z" fill="#F5C7D6" stroke="#F4EFE6" stroke-width="2"/></svg>
+  </div>
+
+  <!-- candle, illuminated flourish -->
+  <div class="piece stk r6" style="--oc:#F4EFE6; height:100px;">
+    <svg viewBox="0 0 60 100"><ellipse cx="30" cy="20" rx="7" ry="12" fill="#E8C542"/><rect x="24" y="30" width="12" height="60" rx="3" fill="#F4EFE6" stroke="#C9A227" stroke-width="3"/></svg>
+  </div>
+
+</div>
+</body>
+</html>

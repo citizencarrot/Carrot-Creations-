@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Style Reference</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@400;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap');
+  :root{
+    --bone:#F4EFE6;
+    --ink:#1A1A1E;
+    --eggplant:#4A1E3D;
+    --gold:#C9A227;
+    --pink:#D6408A;
+    --pink-pastel:#F5C7D6;
+    --wine:#8E1B3F;
+    --wine-deep:#6B1F2E;
+    --clay:#C4642F;
+    --rust:#B5652E;
+    --mustard:#D68A2E;
+    --chartreuse:#D4E157;
+    --butter:#F2E28A;
+    --teal:#1E6B52;
+    --teal-bright:#4FA8A0;
+    --navy:#1B2A4A;
+    --navy-deep:#1B3F73;
+    --steel:#2A4A6B;
+    --wood:#8A5A34;
+    --wood-dark:#7A4426;
+    --silver:#B7BEC7;
+    --grey:#8F8F88;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background:
+      repeating-linear-gradient(0deg, rgba(74,30,61,0.07) 0 3px, transparent 3px 38px),
+      repeating-linear-gradient(90deg, rgba(30,107,82,0.07) 0 3px, transparent 3px 38px),
+      repeating-linear-gradient(0deg, rgba(214,64,138,0.05) 0 1px, transparent 1px 19px),
+      repeating-linear-gradient(90deg, rgba(27,63,115,0.05) 0 1px, transparent 1px 19px),
+      var(--bone);
+    font-family: 'Inter', sans-serif;
+    padding: 32px 20px 60px;
+    color: var(--ink);
+  }
+  .wrap { max-width: 760px; margin: 0 auto; }
+  h1 { font-family: 'Zilla Slab', serif; font-weight: 700; font-size: 34px; color: var(--eggplant); }
+  .sub {
+    display:inline-block;
+    font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--bone); background: var(--wine); padding: 4px 10px; border-radius: 3px; margin-bottom: 10px;
+  }
+  .desc { color: #4A3324; font-size: 14px; margin-top: 10px; max-width: 560px; line-height: 1.6; }
+  .section-block{
+    margin: 34px -16px 0;
+    padding: 22px 16px;
+    border-radius: 8px;
+    position: relative;
+  }
+  .section-block:nth-of-type(4n+1){ background: rgba(74,30,61,0.08); }
+  .section-block:nth-of-type(4n+2){ background: rgba(30,107,82,0.08); }
+  .section-block:nth-of-type(4n+3){ background: rgba(214,64,138,0.08); }
+  .section-block:nth-of-type(4n+4){ background: rgba(214,138,46,0.1); }
+  h2 { font-family: 'Zilla Slab', serif; font-size: 21px; color: var(--eggplant); border-bottom: 2px solid rgba(74,30,61,0.25); padding-bottom: 8px; margin-bottom: 14px; }
+  .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(112px, 1fr)); gap: 12px; }
+  .swatch { border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.18); border: 2px solid var(--bone); }
+  .fill { height: 78px; }
+  .label { background: var(--ink); padding: 8px 10px; }
+  .name { font-size: 12.5px; font-weight: 600; color: var(--bone); }
+  .hex { font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: #B7A9C4; }
+  .pattern-list { display: flex; flex-direction: column; gap: 10px; }
+  .pattern-item { background: var(--bone); border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; padding: 14px 16px; font-size: 14px; line-height: 1.5; box-shadow: 3px 3px 0 rgba(0,0,0,0.06); }
+  .pattern-item b { color: var(--wine); }
+  .type-row { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 6px; }
+  .type-sample { background: var(--bone); border-radius: 8px; padding: 16px 20px; flex: 1; min-width: 200px; box-shadow: 3px 3px 0 rgba(0,0,0,0.06); }
+  .type-sample .tag { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--teal); text-transform: uppercase; letter-spacing: 1px; }
+  .display-sample { font-family: 'Zilla Slab', serif; font-weight: 700; font-size: 26px; margin-top: 6px; color: var(--eggplant); }
+  .body-sample { font-family: 'Inter', sans-serif; font-size: 15px; margin-top: 6px; }
+  .mono-sample { font-family: 'IBM Plex Mono', monospace; font-size: 15px; margin-top: 6px; }
+  footer { margin-top: 40px; font-size: 12px; color: #6b5f52; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="sub">Living style reference</div>
+  <h1>Eclectic Maximalist Jewel &amp; Plaid</h1>
+  <p class="desc">Lighter base now, with plaid doing the work that a dark background used to — a crosshatch of eggplant, teal, hot pink, and navy running under everything. Jewel tones, pastels, wood, and metal all still mesh rather than match; the difference is there's no empty space left uncolored.</p>
+
+  <div class="section-block">
+    <h2>Core palette — jewel &amp; rich</h2>
+    <div class="swatches">
+      <div class="swatch"><div class="fill" style="background:#4A1E3D"></div><div class="label"><div class="name">Eggplant</div><div class="hex">#4A1E3D</div></div></div>
+      <div class="swatch"><div class="fill" style="background:#8E1B3F"></div><div class="label"><div class="name">Wine</div><div class="hex">#8E1B3F</div></div></div>
+      <div class="swatch"><div class="fill" style="background:#D6408A"></div><div class="label"><div class="name">Hot Pink Pop</div><div class="hex">#D6408A</div></div></div>
+      <div class="swatch"><div class="fill" style="background:#C9A227"></div><div class="label"><div class="name">Brass Gold</div><div class="hex">#C9A227</div></div></div>
+      <div class="swatch"><div class="fill" style="background:#C4642F"></div><div class="label"><div class="name">Burnt Clay</div><div class="hex">#C4642F</div></div></div>
+      <div class="swatch"><div class="fill" style="background:#D68A2E"></div><div class="label"><div class="name">Mustard</div><div class="hex">#D68A2E</div></div></div>
+      <div class="swatch"><div class="fill" style="background:#1E6B52"></div><div class="label"><div class="name">Deep Teal</div><div class="hex">#1E6B52</div></div></div>
+      <div class="swatch"><div class="fill" style="background:#1B3F73"></div><div class="label"><div class="name">Steel Navy</div><div class="hex">#1B3F73</div></div></div>
+      <div class="swatch"><div class="fill" style="background:#1B2A4A"></div><div class="label"><div class="name">Navy</div><div class="hex">#1B2A4A</div></div></div>
+      <div class="swatch"><div class="fill" style="background:linear-gradient(135deg,#C7CDD6,#8A9199,#C7CDD6)"></div><div class="label"><div class="name">Silver Metal</div><div class="hex">#B7BEC7</div></div></div>
+      <div class="swatch"><div class="fill" style="background:#8A5A34"></div><div class="label"><div class="name">Warm Wood</div><div class="hex">#8A5A34</div></div></div>
+      <div class="swatch"><div class="fill" style="background:#F4EFE6"></div><div class="label"><div class="name">Bone</div><div class="hex">#F4EFE6</div></div></div>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <h2>Pastel counterweights</h2>
+    <p class="desc" style="margin-top:-6px; margin-bottom:14px;">Sit right up against the jewel tones — not toned down to match them.</p>
+    <div class="swatches">
+      <div class="swatch"><div class="fill" style="background:#F5C7D6"></div><div class="label"><div class="name">Baby Pink</div><div class="hex">#F5C7D6</div></div></div>
+      <div class="swatch"><div class="fill" style="background:#BFE0E8"></div><div class="label"><div class="name">Sky Pastel</div><div class="hex">#BFE0E8</div></div></div>
+      <div class="swatch"><div class="fill" style="background:#F2E28A"></div><div class="label"><div class="name">Butter Yellow</div><div class="hex">#F2E28A</div></div></div>
+      <div class="swatch"><div class="fill" style="background:#4FA8A0"></div><div class="label"><div class="name">Bright Teal</div><div class="hex">#4FA8A0</div></div></div>
+      <div class="swatch"><div class="fill" style="background:#D6C7E8"></div><div class="label"><div class="name">Lilac</div><div class="hex">#D6C7E8</div></div></div>
+      <div class="swatch"><div class="fill" style="background:#D4E157"></div><div class="label"><div class="name">Chartreuse Pop</div><div class="hex">#D4E157</div></div></div>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <h2>Patterns &amp; motifs</h2>
+    <div class="pattern-list">
+      <div class="pattern-item"><b>Plaid, not just accent</b> — the crosshatch running behind this whole page — now a base layer, not a border trim.</div>
+      <div class="pattern-item"><b>Checkerboard and gingham tile</b> — the two-tone grid from patchwork floors and nail art — a natural fit for tables, trackers, and calendar cells.</div>
+      <div class="pattern-item"><b>Etched silver and brass</b> — armor-style engraved metal alongside the warmer brass gold, so cool and warm metallics both get a seat.</div>
+      <div class="pattern-item"><b>Collage-page layering</b> — photos, color blocks, and text stacked and overlapping rather than sitting in tidy separate boxes.</div>
+      <div class="pattern-item"><b>Turned-wood, scalloped silhouettes</b> — mixed-era furniture shapes as inspiration for card edges, dividers, and corners.</div>
+      <div class="pattern-item"><b>No empty space</b> — gaps between sections get a color block instead of being left as blank page — the new rule alongside "mesh, don't match."</div>
+      <div class="pattern-item"><b>Worn-in over polished</b> — hand-painted signs, stitched leather, imperfect texture — favored over anything flat or corporate-clean.</div>
+      <div class="pattern-item"><b>Mesh, don't match</b> — the core rule, in your own words: combine colors, patterns, and eras on purpose instead of keeping any one thing uniform.</div>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <h2>Type pairing</h2>
+    <div class="type-row">
+      <div class="type-sample"><div class="tag">Display</div><div class="display-sample">Zilla Slab</div></div>
+      <div class="type-sample"><div class="tag">Body</div><div class="body-sample">Inter — clean, readable, quiet</div></div>
+      <div class="type-sample"><div class="tag">Data / Numbers</div><div class="mono-sample">IBM Plex Mono 123.45</div></div>
+    </div>
+  </div>
+
+  <footer>Used in: Cash Ledger tracker, portfolio site. Colors pulled from your moodboard-collage-v3 reference — lighter base, plaid as a full background layer, no leftover empty space.</footer>
+</div>
+</body>
+</html>
